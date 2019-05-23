@@ -20,7 +20,7 @@ module.exports = {
   ],
   author: {
     name: '면준이',
-    photo: '/photo.gif',
+    photo: '/photo.jpg',
     bio: '주 7일 공부 잊지마',
     contacts: {
       email: '93kimhyunjun@gmail.com',
