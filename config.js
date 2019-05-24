@@ -2,7 +2,7 @@
 
 module.exports = {
   url: 'https://junkim.netlify.com',
-  title: 'Blog by Jun Kim',
+  title: 'devlog.jun',
   subtitle: '주 7일 공부 잊지마',
   copyright: '© All rights reserved.',
   disqusShortname: 'disqus_mpEW7U3vCV',
