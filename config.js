@@ -5,7 +5,7 @@ module.exports = {
   title: 'devlog.jun👨🏻‍💻',
   subtitle: '주 7일 공부 잊지마',
   copyright: '© All rights reserved.',
-  disqusShortname: 'disqus_mpEW7U3vCV',
+  disqusShortname: 'https-junkim-netlify-com',
   postsPerPage: 4,
   googleAnalyticsId: 'UA-140646384-1',
   menu: [
