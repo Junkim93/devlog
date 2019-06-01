@@ -1,9 +1,9 @@
 ---
-title: 프로그래머스. 다리를 지나는 트럭
-date: "2019-05-26"
+title: 프로그래머스lv2. 다리를 지나는 트럭
+date: "2019-06-01"
 template: "post"
 draft: false
-slug: "/posts/프로그래머스_다리를 지나는 트럭"
+slug: "/posts/programmers"
 category: "Algorithm"
 tags:
   - "Algorithm"
