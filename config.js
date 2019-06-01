@@ -7,7 +7,7 @@ module.exports = {
   copyright: '© All rights reserved.',
   disqusShortname: 'https-junkim-netlify-com',
   postsPerPage: 4,
-  googleAnalyticsId: 'UA-140646384-1',
+  googleAnalyticsId: '',
   menu: [
     {
       label: 'Articles',
