@@ -2,7 +2,7 @@
 
 module.exports = {
   url: "https://junkim.netlify.com",
-  title: "devlog.jun👨🏻‍💻",
+  title: "개발꿈나무의 개발로그",
   subtitle: "주 7일 공부 잊지마",
   copyright: "© All rights reserved.",
   disqusShortname: "https-junkim-netlify-com",
@@ -27,7 +27,7 @@ module.exports = {
     }
   ],
   author: {
-    name: "면준이",
+    name: "개발꿈나무 (JUN)",
     photo: "/photo.jpg",
     bio: "주 7일 공부 잊지마",
     contacts: {
