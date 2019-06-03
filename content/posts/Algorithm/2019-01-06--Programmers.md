@@ -78,6 +78,5 @@ function solution(bridge_length, weight, truck_weights) {
 - 실행 순서에 따라 결과값이 차이가 나서 헤맸다.
     - 다리를 건널 트럭을 배열에 추가하기 전에, 다리를 다 건넌 트럭에 다한 처리를 해줘야했다
 
-
-### 출처
-> [프로그래머스](https://programmers.co.kr/learn/courses/30/lessons/42583)
+---
+출처: [프로그래머스](https://programmers.co.kr/learn/courses/30/lessons/42583)
