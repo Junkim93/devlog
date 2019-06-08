@@ -9,10 +9,13 @@ tags:
   - "Algorithm"
   - "Programmers"
 description: "하루 한 개 알고리즘 풀기 잊지마 (Programmers)"
+
 ---
+
 # 문제 및 답안 
 
 ## 문제
+
 1번 수포자가 찍는 방식: 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, ...
 2번 수포자가 찍는 방식: 2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5, ...
 3번 수포자가 찍는 방식: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, ...
@@ -32,11 +35,11 @@ description: "하루 한 개 알고리즘 풀기 잊지마 (Programmers)"
 | [1,2,3,4,5] | [1]     |
 | [1,3,2,4,2] | [1,2,3] |
 
----
+------
 
 ## JavaScript 답안
 
-``` js
+```js
 function solution(answers) {
     let answer = [];
     
@@ -71,11 +74,12 @@ function solution(answers) {
     return answer;
 }
 ```
----
+
+------
 
 ## 다른 사람 풀이 코드
 
-``` js
+```js
 function solution(answers) {
     var answer = [];
     var a1 = [1, 2, 3, 4, 5];
@@ -103,6 +107,7 @@ function solution(answers) {
 - 각각의 수포자가 찍은 값을 어떻게 순회할 것인지
 - 최대값을 도출해내는 방법
 
----
+------
+
 출처: [프로그래머스](https://programmers.co.kr/learn/courses/30/lessons/42840?language=javascript)
 
