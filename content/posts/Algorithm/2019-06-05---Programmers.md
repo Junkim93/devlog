@@ -1,5 +1,5 @@
 ---
-title: 프로그래머스lv1. 모의고사
+title: Lv1. 모의고사
 date: "2019-06-05"
 template: "post"
 draft: false
@@ -8,7 +8,8 @@ category: "Algorithm"
 tags:
   - "Algorithm"
   - "Programmers"
-description: "하루 한 개 알고리즘 풀기 잊지마 (Programmers)"
+  - "JavaScript"
+description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 프로그래머스lv2. 다리를 지나는 트럭
+title: Lv2. 다리를 지나는 트럭
 date: "2019-06-01"
 template: "post"
 draft: false
@@ -8,7 +8,8 @@ category: "Algorithm"
 tags:
   - "Algorithm"
   - "Programmers"
-description: "하루 한 개 알고리즘 풀기 잊지마 (Programmers)"
+  - "JavaScript"
+description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 ---
 # 문제 및 답안 
 
