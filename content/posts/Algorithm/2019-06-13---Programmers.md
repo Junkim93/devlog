@@ -1,5 +1,5 @@
 ---
-title: Lv1. K번째수
+title: Lv1. 나누어 떨어지는 숫자 배열
 date: "2019-06-13"
 template: "post"
 draft: false
