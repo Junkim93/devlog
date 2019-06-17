@@ -2,7 +2,7 @@
 title: "1.2 우리에게 친근한 컴퓨터 구조와 파일"
 date: "2019-06-17"
 template: "post"
-draft: true
+draft: false
 slug: "/posts/CS_ComputerStructureAndFile"
 category: "Computer Science"
 tags:

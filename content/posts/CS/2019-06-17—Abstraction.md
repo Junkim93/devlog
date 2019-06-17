@@ -24,7 +24,7 @@ description: "CS기초 공부내용 정리 📖"
 
   ex) 포인트카드
   
-  ![membership](content/posts/CS/rewardApp.jpg)
+  ![membership](https://github.com/Junkim93/devlog/blob/master/content/posts/CS/rewardApp.jpg?raw=true)
   
   - 왼쪽은 CJ ONE 앱이며 맴버십 카드의 여러가지 기능을 표현합니다.
   - 오른쪽은 포인트적립 카드 관리기능을 제공하는 Syrup 앱의 맴버십 카드 화면입니다.
