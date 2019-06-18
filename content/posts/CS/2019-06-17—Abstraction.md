@@ -1,6 +1,6 @@
 ---
 title: "1.1 추상화의 개념"
-date: "2019-06-17"
+date: "Mon Jun 17 2019 23:00:48 GMT+0900"
 template: "post"
 draft: false
 slug: "/posts/CS_Abstraction"

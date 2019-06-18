@@ -1,6 +1,6 @@
 ---
 title: "1.2 우리에게 친근한 컴퓨터 구조와 파일"
-date: "2019-06-17"
+date: "Mon Jun 17 2019 23:30:48 GMT+0900"
 template: "post"
 draft: false
 slug: "/posts/CS_ComputerStructureAndFile"
