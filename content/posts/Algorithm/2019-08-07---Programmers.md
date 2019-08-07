@@ -75,7 +75,7 @@ function solution(n) {
 
 ```javascript
 function solution(n) {
-    const arr = [], output = [];
+    const arr = [];
     
     // 인덱스 번호가 주어진 숫자 n과 대응하도록 
 		// 빈 배열을 만들고 원소는 true 값으로 채워준다.
