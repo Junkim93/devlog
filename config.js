@@ -1,38 +1,39 @@
-"use strict";
+'use strict';
 
 module.exports = {
-  url: "https://junkim.netlify.com",
-  title: "개발꿈나무의 개발로그",
-  subtitle: "주 7일 공부 잊지마",
-  copyright: "© All rights reserved.",
-  disqusShortname: "https-junkim-netlify-com",
+  url: 'https://junkim.netlify.com',
+  title: '개발꿈나무의 개발로그',
+  subtitle: '주 7일 공부 잊지마',
+  copyright: '© All rights reserved.',
+  disqusShortname: 'https-junkim-netlify-com',
   postsPerPage: 10,
-  googleAnalyticsId: "UA-140646384-1",
+  googleAnalyticsId: 'UA-140646384-1',
   menu: [
     {
-      label: "Articles",
-      path: "/"
+      label: 'Articles',
+      path: '/'
     },
     {
-      label: "Categories",
-      path: "/categories"
+      label: 'Categories',
+      path: '/categories'
     },
     {
-      label: "Tags",
-      path: "tags"
+      label: 'Tags',
+      path: 'tags'
     },
     {
-      label: "About me",
-      path: "/pages/about"
+      label: 'About me',
+      path: '/pages/about'
     }
   ],
   author: {
-    name: "개발꿈나무 (JUN)",
-    photo: "/photo.jpg",
-    bio: "주 7일 공부 잊지마",
+    name: 'JUN',
+    photo: '/photo.jpg',
+    bio: '주 7일 공부 잊지마',
     contacts: {
-      email: "93kimhyunjun@gmail.com",
-      github: "junkim93"
+      email: '93kimhyunjun@gmail',
+      github: 'junkim93',
+      notion: 'https://www.notion.so/junkim/devlog-jun-0f34fae5799f41f2945d6427dd9cd78b'
     }
   }
 };

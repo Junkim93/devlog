@@ -18,6 +18,9 @@ const getContactHref = (name: string, contact: string) => {
     case 'email':
       href = `mailto:${contact}`;
       break;
+    case 'notion':
+      href = `${contact}`;
+      break;
     default:
       href = contact;
       break;
