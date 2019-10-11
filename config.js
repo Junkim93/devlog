@@ -31,7 +31,7 @@ module.exports = {
     photo: '/photo.jpg',
     bio: '주 7일 공부 잊지마',
     contacts: {
-      email: '93kimhyunjun@gmail',
+      email: '93kimhyunjun@gmail.com',
       github: 'junkim93',
       notion: 'https://www.notion.so/junkim/devlog-jun-0f34fae5799f41f2945d6427dd9cd78b'
     }
