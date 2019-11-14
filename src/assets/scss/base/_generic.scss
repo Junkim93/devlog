@@ -39,35 +39,35 @@ h2 {
   font-size: $typographic-base-font-size * 1.6875;
   @include line-height(1.5);
   @include margin-top(2);
-  @include margin-bottom(0.5);
+  @include margin-bottom(0);
 }
 
 h3 {
   font-size: $typographic-base-font-size * 1.375;
   @include line-height(1);
   @include margin-top(2);
-  @include margin-bottom(0.5);
+  @include margin-bottom(0);
 }
 
 h4 {
   font-size: $typographic-base-font-size * 1.2;
   @include line-height(1);
   @include margin-top(1.5);
-  @include margin-bottom(0.5);
+  @include margin-bottom(0);
 }
 
 h5 {
   font-size: $typographic-base-font-size;
   @include line-height(1);
   @include margin-top(2.5);
-  @include margin-bottom(0.5);
+  @include margin-bottom(0);
 }
 
 h6 {
   font-size: $typographic-base-font-size;
   @include line-height(1);
   @include margin-top(2.5);
-  @include margin-bottom(0.5);
+  @include margin-bottom(0);
 }
 
 img {
@@ -78,8 +78,9 @@ img {
 }
 
 hr {
-  margin-top: 45px;
-  margin-bottom: 45px;
+  margin-top: 0px;
+  margin-bottom: 25px;
+  width: 100%;
   border: 0;
   color: $color-gray-post;
   display: block;
@@ -91,12 +92,11 @@ hr {
     to bottom,
     transparent 1px,
     transparent 11px,
+    $color-gray-post 9px,
     $color-gray-post 11px,
-    $color-gray-post 13px,
     transparent 15px,
-    transparent 28px
+    transparent 35px
   );
-  width: 100px;
 }
 
 a {
