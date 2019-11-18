@@ -1,5 +1,5 @@
 ---
-title: "TDD를 위한 설정하기"
+title: "(번역) Vue Testing: TDD를 위한 설정하기"
 date: "2019-11-14T14:24:59.828Z"
 template: "post"
 draft: false
@@ -12,7 +12,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 ---
 
 > [Vue testing handbook](https://lmiller1990.github.io/vue-testing-handbook/setting-up-for-tdd.html#installing-vue-cli) <br>
-> 이 글은 원작자의 허락 하에 Vue testing handbook의 일부를 번역한 글입니다. <br>
+> 이 글은 원작자의 허락하에 Vue testing handbook의 일부를 번역한 글입니다. <br>
 > 번역문에 대한 좋은 의견이 있으면 말씀해주세요. <br>
 > 감사합니다.
 
@@ -92,9 +92,9 @@ export default {
 
 ------
 
-`Greeting`은 `greeting` 값을 랜더(render) 하는 한 가지 책임만 가집니다. 아래와 같은 전략을 가지려고 합니다.
+`Greeting`은 `greeting` 값을 렌더(render) 하는 한 가지 책임만 가집니다. 아래와 같은 전략을 가지려고 합니다.
 
-1. `마운트(mount)`로 컴포넌트를 랜더 합니다.
+1. `마운트(mount)`로 컴포넌트를 렌더 합니다.
 2. 컴포넌트의 텍스트는 "Vue and TDD"를 포함하도록 assert 합니다.
 
 `tests/unit` 안에 `Greeting.spec.js`를 생성합니다. `Greeting.vue`와 `mount`를 import 합니다. 그러고나서 테스트의 개요를 추가합니다.
@@ -112,7 +112,7 @@ describe('Greeting.vue', () => {
 
 TDD에서 사용하는 두 가지 문법이 있습니다. 여기서는 Jest에서 자주 사용하는 `describe`와 `it` 문법을 사용하겠습니다. `describe`는 대부분의 경우에 테스트에 대한 개요를 나타냅니다. 이 경우에는 `Greeting.vue` 입니다. `it`은 목표하는 테스트를 수행하기 위한 책임 중 한 부분을 나타냅니다. 컴포넌트에 특징을 추가할수록 `it` 블록도 추가됩니다.
 
-이제 `mount`로 컴포넌트를 랜더링합니다.  standard practice는 컴포넌트를 `wrapper`라는 변수에 할당하는 것입니다. 올바르게 작동하고 있는지 확인하기 위해서 결과를 출력하려고 합니다.
+이제 `mount`로 컴포넌트를 렌더링합니다.  standard practice는 컴포넌트를 `wrapper`라는 변수에 할당하는 것입니다. 올바르게 작동하고 있는지 확인하기 위해서 결과를 출력하려고 합니다.
 
 ```javascript
 const wrapper = mount(Greeting)
@@ -236,4 +236,4 @@ Greeting.vue
 
 Jest가 좋은 피드백을 줍니다. 예상했던 결과와 실제 결과를 비교해서 볼 수 있습니다. 거기다가 어떤 라인에서 실패했는지도 알려줍니다. 테스트는 예상대로 실패했습니다. `Greeting.vue`를 되돌리고 테스트가 통과하는지 다시 확인해보세요.
 
-다음 챕터에서는 컴포넌트를 랜더링 하기 위해서 `vue-test-utils`에서 제공하는 `mount`와 `shallowMount`라는 두 가지 메서드를 살펴보겠습니다.
+다음 챕터에서는 컴포넌트를 렌더링 하기 위해서 `vue-test-utils`에서 제공하는 `mount`와 `shallowMount`라는 두 가지 메서드를 살펴보겠습니다.
