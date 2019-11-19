@@ -24,7 +24,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 `propsData`는 `mount`와 `shallowMount` 양쪽 모두에서 사용할 수 있습니다. 보통, 부모 컴포넌트에게 props를 받는 컴포넌트를 테스트할 때 사용합니다.
 
-`propsData`는  `shallowMount`나 `mount`의 두번째 인자로 넘겨집니다. 아래와 같은 형태를 가집니다.
+`propsData`는  `shallowMount`나 `mount`의 두 번째 인자로 넘겨집니다. 아래와 같은 형태를 가집니다.
 
 ```javascript
 const wrapper = shallowMount(Foo, {
@@ -42,8 +42,8 @@ const wrapper = shallowMount(Foo, {
 
 간단한 `<SubmitButton>` 컴포넌트를 만들어 보겠습니다. `msg`와 `isAdmin`이라는 두 개의 `props`를 가지고 있습니다. `isAdmin` prop의 값에 따라서 이 컴포넌트는 `<span>` 태그에 두 가지 경우 중 하나의 상태를  지닙니다.
 
-- `Not Authorized`: `isAdmin`이 false 값을 가지거나 prop으로 값이 넘어오지 않는 경우에 해당합니다.
-- `Admin Privileges`: `isAdmin`이 true인 경우에 해당합니다.
+- `Not Authorized`: `isAdmin`이 false 값을 가지거나 prop으로 값이 넘어오지 않는 상황에 해당합니다.
+- `Admin Privileges`: `isAdmin`이 true인 상황에 해당합니다.
 
 ```vue
 <template>
@@ -123,7 +123,7 @@ PASS  tests/unit/SubmitButton.spec.js
 </div>
 ```
 
-`msg` prop이 처리되고, 마크업 결과가 올바르게 랜더된 것을 볼 수 있습니다.
+`msg` prop이 처리되고, 마크업 결과가 올바르게 렌더된 것을 볼 수 있습니다.
 
 
 
@@ -173,7 +173,7 @@ PASS  tests/unit/SubmitButton.spec.js
 </div>
 ```
 
-`isAdmin` prop이 올바른 `<span>` 엘리먼트를 랜더하는데 사용된 것을 볼 수 있습니다.
+`isAdmin` prop이 올바른 `<span>` 엘리먼트를 렌더하는데 사용된 것을 볼 수 있습니다.
 
 
 
@@ -238,7 +238,7 @@ PASS  tests/unit/SubmitButton.spec.js
      ✓ renders a message (3ms)
 ```
 
-좋은 테스트 코드가 있기 때문에, 이제 쉽고 자신있게 코드를 수정할 수 있습니다.
+좋은 테스트 코드가 있기 때문에, 이제 쉽고 자신 있게 코드를 수정할 수 있습니다.
 
 
 
