@@ -45,7 +45,7 @@ const wrapper = shallowMount(Foo, {
 - `Not Authorized`: `isAdmin`이 false 값을 가지거나 prop으로 값이 넘어오지 않는 상황에 해당합니다.
 - `Admin Privileges`: `isAdmin`이 true인 상황에 해당합니다.
 
-```vue
+```js
 <template>
   <div>
 		<span v-if="isAdmin">Admin Privileges</span>

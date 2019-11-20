@@ -69,7 +69,7 @@ Time:        2.074s
 
 `src/components` 안에 `Greeting.vue` 파일을 만들어봅시다. `Greeting.vue` 안에 아래와 같은 내용을 추가합니다.
 
-``` vue
+``` js
 <template>
   <div>
     {{ greeting }}
