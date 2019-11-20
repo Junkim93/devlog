@@ -3,7 +3,7 @@ title: "(번역) Vue Testing: Computed 프로퍼티"
 date: "2019-11-20T12:06:54.551Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue03"
+slug: "/posts/testingvue04"
 category: "Vue.js"
 tags:
   - "Vue.js"
