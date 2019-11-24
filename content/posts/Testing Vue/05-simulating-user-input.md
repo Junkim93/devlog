@@ -108,7 +108,7 @@ describe("FormSubmitter", () => {
 
 테스트는 설명할 필요도 없이 꽤 명백합니다. 컴포넌트를  `shallowMount` 하고, username을 설정합니다. 그리고 사용자의 입력을 시연하기 위해 제공하는 `vue-test-utils`의 `trigger` 메서드를 사용합니다. `trigger`는 커스텀 이벤트로 작동합니다. 수식어(modifier)를 사용하는 `submit.prevent`, `keydown.enter` 같은 것들도 마찬가지입니다.
 
-`trigger`를 호출하고 나서, `await wrapper.vm.$nextTick()`이 작동합니다. `async`로 테스트를 표시해야만 하는 이유입니다. 그래서 `await`을 사용할 수 있습니다. `vue-test-utils`의 beta 28 버전 시점에서, 뷰의 반응성 시스템이 DOM을 업데이트한 것을 확인하기 위해서  `nextTick`을 호출하는 것이 필요합니다. 때때로 `nextTick`을 호출하지 않고 진행할 수도 있습니다. 그러나 만약 컴포넌트가 복잡해지기 시작한다면, race condition을 맞이할 수도 있고, 검증 코드가 Vue가 DOM을 업데이트하기 전에 동작할 수도 있습니다. 이 부분에 대해서 더 알고 싶다면 (공식문서 vue-test-utils documentation)[https://vue-test-utils.vuejs.org/guides/#updates-applied-by-vue]를 읽어보세요.
+`trigger`를 호출하고 나서, `await wrapper.vm.$nextTick()`이 작동합니다. `async`로 테스트를 표시해야만 하는 이유입니다. 그래서 `await`을 사용할 수 있습니다. `vue-test-utils`의 beta 28 버전 시점에서, 뷰의 반응성 시스템이 DOM을 업데이트한 것을 확인하기 위해서  `nextTick`을 호출하는 것이 필요합니다. 때때로 `nextTick`을 호출하지 않고 진행할 수도 있습니다. 그러나 만약 컴포넌트가 복잡해지기 시작한다면, race condition을 맞이할 수도 있고, 검증 코드가 Vue가 DOM을 업데이트하기 전에 동작할 수도 있습니다. 이 부분에 대해서 더 알고 싶다면 [공식문서 vue-test-utils documentation](https://vue-test-utils.vuejs.org/guides/#updates-applied-by-vue)를 읽어보세요.
 
 위 테스트는 유닛 테스트의 세 단계를 따릅니다.
 
@@ -146,7 +146,7 @@ handleSubmitAsync() {
 }
 ```
 
-이 경우에, 한 가지 기술(technique)은 원하는 테스트 환경을 조성하기 위해서  `this.$http`를 mock 하는 일입니다.  `mocks` 마운트하는 옵션에 대해서는 (여기)[https://vue-test-utils.vuejs.org/api/options.html#mocks]서 읽어볼 수 있습니다. `http.get` 메서드의 mock 구현을 살펴보겠습니다.
+이 경우에, 한 가지 기술(technique)은 원하는 테스트 환경을 조성하기 위해서  `this.$http`를 mock 하는 일입니다.  `mocks` 마운트하는 옵션에 대해서는 [여기](https://vue-test-utils.vuejs.org/api/options.html#mocks)서 읽어볼 수 있습니다. `http.get` 메서드의 mock 구현을 살펴보겠습니다.
 
 ```js
 let url = ''
@@ -261,7 +261,7 @@ it("reveals a notification when submitted", async () => {
 })
 ```
 
-하지만 여전히 테스트는 프로미스가 해결 되기 전에 끝날 것입니다. 이것과 관련해서 할 수 있는 한 가지 방법은 (flush-promise)[https://www.npmjs.com/package/flush-promises]를 사용하는 것입니다. Flush-promise는 간단한 Node.js 모듈인데, 모든 pending 상태의 프로미스를 즉시 해결하는 일을 합니다. `yarn add flush-promises`로 라이브러리를 설치하고, 아래와 같이 테스트를 업데이트합니다.
+하지만 여전히 테스트는 프로미스가 해결 되기 전에 끝날 것입니다. 이것과 관련해서 할 수 있는 한 가지 방법은 [flush-promise](https://www.npmjs.com/package/flush-promises)를 사용하는 것입니다. Flush-promise는 간단한 Node.js 모듈인데, 모든 pending 상태의 프로미스를 즉시 해결하는 일을 합니다. `yarn add flush-promises`로 라이브러리를 설치하고, 아래와 같이 테스트를 업데이트합니다.
 
 ```js
 import flushPromises from "flush-promises"
@@ -312,7 +312,7 @@ expect(data).toEqual({ username: "alice" })
 - `mocks`를 마운트하는 옵션을 사용해서, `Vue.prototype`에 부착된 메서드를 mock 하는 방법
 - 모든 프로미스를 즉시 해결하기 위해서, 유닛 테스트에서 유용한 기술인  `flush-promises`를 사용하는 방법
 
-이 페이지에 설명한 테스트의 소스 코드는 (여기)[https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/tests/unit/FormSubmitter.spec.js]서 보실 수 있습니다.
+이 페이지에 설명한 테스트의 소스 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/tests/unit/FormSubmitter.spec.js)서 보실 수 있습니다.
 
 
 
