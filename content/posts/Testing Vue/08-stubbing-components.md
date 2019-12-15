@@ -1,9 +1,9 @@
 ---
-title: "(번역) Vue Testing: 엘리먼트와 컴포넌트 찾기"
-date: "2019-12-13T10:55:29.271Z"
+title: "(번역) Vue Testing: 컴포넌트 stubbing"
+date: "2019-12-10T09:31:02.695Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue09"
+slug: "/posts/testingvue08"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -18,13 +18,31 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 
 
-## 엘리먼트 찾기
+## 왜 stub일까요?
 
 ---
 
-`vue-test-utils`는 `find` 메서드를 사용해서 html 엘리먼트나 다른 Vue 컴포넌트의 존재를 발견하고 어설트(assert) 하는 여러 가지 방법을 제공합니다. `find`의 주 사용법은 컴포넌트가 엘리먼트나 자식 컴포넌트를 제대로 렌더했는지 어설트하는 것입니다.
+유닛 테스트를 작성할때, 종종 관심사가 아닌 코드의 일부를 stub 하기를 원합니다. stub은 단순히 다른 것을 나타내는 코드의 한 조각입니다. `<UserContainer>`를 위한 테스트를 작성한다고 해봅시다. 아래와 같은 모습을 가졌습니다.
 
-이 페이지에서 설명한 테스트의 소스 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/tree/master/demo-app/tests/unit/Parent.spec.js)서 찾을 수 있습니다.
+``` html
+<UserContainer>
+	<UsersDisplay />
+</UserContainer>
+```
+
+`<UserDisplay>`는 아래와 같이 `created` 라이프사이클에 메서드를 가집니다.
+
+``` js
+created() {
+  axios.get("/users")
+}
+```
+
+`<UserDisplay>`를 렌더하는지 어설트(assert) 하는 테스트를 작성하고 싶습니다.
+
+`axios`는 `created` 훅에서 외부 서비스에 ajax 요청을 합니다. 여러분이 `mount(UserContainer)`를 할 때, `<UserDisplay>`도 마운트되고, `created`는 ajax 요청을 초기화 합니다. 유닛 테스트기 때문에, 우리는 `<UserContainer>`가 올바르게 `<UserDisplay>`를 랜더하는지 아닌지에만 관심이 있습니다. ajax 요청이 올바른 엔드포인트(endpoint) 등으로 연결되었는지를 확인하는 일은 `<UsersDisplay>`의 책임이고, `<UsersDisplay>`의 테스트 파일에서 테스트해야 합니다.
+
+`<UserDisplay>`가 ajax 요청을 초기화하는 일을 막는 한 가지 방법은 컴포넌트 밖으로 스터빙(stubbing) 하는 것입니다. 스텁(stubs)을 사용하는 이점과 다양한 방법들을 더 잘 이해하기 위해서, 컴포넌트를 작성하고 테스트 해보겠습니다.
 
 
 
@@ -32,168 +50,137 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 ---
 
-이번 예제를 위해서 `<Child>`와 `<Parent>` 컴포넌트를 만들겠습니다.
+이 예제는 두 개의 컴포넌트를 사용할 예정입니다. 첫 번째 컴포넌트는 `ParentWithAPICallChild` 입니다. 이 컴포넌트는 간단하게 또 다른 컴포넌트를 렌더합니다.
 
-Child:
-
-```vue
+``` html
 <template>
-	<div>Child</div>
+	<ComponentWithAsyncCall />
 </template>
 
 <script>
+import ComponentWithAsyncCall from "./ComponentWithAsyncCall.vue"
+  
 export default {
-	name: "Child"
+  name: "ParentWithAPICallChild",
+  
+  components: {
+    ComponentWithAsyncCall
+  }
 }
 </script>
 ```
 
-Parent:
+`<ParentWithAPICallChild>`는 간단한 컴포넌트입니다. 이 컴포넌트의 유일한 책임은 `<ComponentWithAsyncCall>`를 렌더하는 일입니다.  `<ComponentWithAsyncCall>`은 이름처럼,  `axios` http 클라이언트를 사용한 ajax 호출을 수행합니다.
 
-```vue
+``` html
 <template>
-	<div>
-    <span v-show="showSpan">
-  		Parent Component
-  	</span>
-    <Child v-if="showChild" />
-  </div>
+	<div></div>
 </template>
 
 <script>
-import Child from "./Child.vue"
+import axios from "axios"
  
 export default {
-  name: "Parent",
-
-  components: { Child },
+  name: "ComponentWithAsyncCall",
   
-  data() {
-		return {
-      showSpan: false,
-      showChild: false
+  created() {
+    this.makeApiCall()
+  },
+  
+  methods: {
+    async makeApiCall() {
+      console.log("Making api call")
+      await axios.get("https://jsonplaceholder.typicode.com/posts/1")
     }
   }
 }
 </script>
 ```
 
+`<ComponentWithAsyncCall>`은 `created` 라이프사이클 훅에 있는  `makeApiCall`을 호출합니다.
 
 
-## `querySelector` 문법과 `find`
+
+## `mount`를 사용해서 테스트 작성하기
 
 ---
 
-`document.querySelector`와 함께 사용하는 문법을 사용하면 정규 엘리먼트는 쉽게 선택할 수 있습니다. `vue-test-utils`는 조건부로 `v-show`를 사용해 렌더한 엘리먼트가 보이는지 안보이는지를 확인하는  `isVisible` 메서드도 제공합니다. `Parent.spec.js`를 만들고 내부에 아래와 같은 테스트를 추가하겠습니다.
+`<ComponentWithAsyncCall>`이 렌더됐는지 확인하기 위한 테스트를 작성하겠습니다.
 
 ``` js
-import { mount, shallowMount } from "@vue/test-utils"
-import Parent from "@/components/Parent.vue"
+import { shallowMount, mount } from '@vue/test-utils'
+import ParentWithAPICallChild from '@/components/ParentWithAPICallChild.vue'
+import ComponentWithAsyncCall from '@/components/ComponentWithAsyncCall.vue'
 
-describe("Parent", () => {
-  it("span 태그를 렌더하지 않는다", () => {
-		const wrapper = shallowMount(Parent)
+describe('ParentWithAPICallChild.vue', () => {
+  it('마운트로 렌더하고 API 호출을 초기화합니다.', () => {
+    const wrapper = mount(ParentWithAPICallChild)
     
-    expect(wrapper.find("span").isVisible()).toBe(false)
+    expect(wrapper.find(ComponentWithAsyncCall).exists()).toBe(true)
   })
 })
 ```
 
-`v-show="showSpan"`은 `false`가 기본설정이기 때문에, 발견한  `<span>` 엘리먼트의 `isVisible` 메서드는 `false`를 리턴한다는 것을 예상할 수 있습니다.  `yarn test:unit`을 실행하면 테스트는 통과합니다. 다음은 `showSpan`이 `true`일 때의 테스트 케이스입니다.
-
-``` js
-it("span 태그를 렌더한다", () => {
-  const wrapper = shallowMount(Parent, {
-    data() {
-      return { showSpan: true }
-    }
-  })
-  
-  expect(wrapper.find("span").isVisible()).toBe(true)
-})
+`yarn test:unit`을 실행하겠습니다.
 
 ```
+PASS  tests/unit/ParentWithAPICallChild.spec.js
 
-이 테스트는 통과합니다! `v-show`를 위한 `isVisible`처럼, `vue-test-utils`는  `v-if`를 사용해서 조건부로 렌더하는 엘리먼트를 테스트할 때 사용하는  `exists` 메서드를 제공합니다.
+console.log src/components/ComponentWithAsyncCall.vue:17
+  Making api call
+```
+
+테스트가 통과했습니다. 멋집니다! 하지만 더 좋게 만들 수 있습니다. 테스트 결과에서 console.log 알림이 나옵니다. 이 메세지는 `makeApiCall` 메서드에서 호출됩니다. 이상적으로 유닛 테스트에서 외부 서비스에 호출 하기를 원하지는 않습니다. 특히 현재 테스트의 주요 관심사가 아닌 컴포넌트일 때 말이죠. 우리는 [여기](https://vue-test-utils.vuejs.org/api/options.html#stubs) `vue-test-utils` 문서에 설명된 `stubs` 마운팅 옵션을 사용할 수 있습니다.
 
 
 
-## `name`과 `Component`로 컴포넌트 찾기
+## `<ComponentWithAsyncCall>`을 스텁하기 위해 `stubs` 사용하기
 
 ---
 
-자식 컴포넌트를 발견하는 일은 정규 HTML 엘리먼트를 찾는 것과 약간 다릅니다. 자식 Vue 컴포넌트의 존재를 어설트하는 두 가지의 주요한 방법이 있습니다.
-
-1. `find(Component)`
-2. `find({ name: "ComponentName" })`
-
-예제 테스트의 문맥을 보면 약간 더 이해하기 쉽습니다. `find(Component)` 문법으로 테스트를 시작해보겠습니다. 이 방법은 컴포넌트를 `import` 하고 import한 컴포넌트를 `find` 함수에 넘겨줘야 합니다.
+테스트를 업데이트 하겠습니다. 이번에는 `ComponentWithAsyncCall`을 스터빙 하겠습니다.
 
 ``` js
-import Child from "@/components/Child.vue"
-
-it("자식 컴포넌트를 렌더하지 않는다", () => {
-  const wrapper = shallowMount(Parent)
-  
-  expect(wrapper.find(Child).exists()).toBe(false)
-})
-```
-
-`find`를 위한 구현체는 꽤 복잡합니다.  `querySelector` 문법뿐만 아니라 몇 가지 다른 문법과 함께 작동하기 때문입니다. 자식 Vue 컴포넌트를 찾는 소스 일부를 [여기](https://github.com/vuejs/vue-test-utils/blob/dev/packages/test-utils/src/find.js)서 볼 수 있습니다. 기본적으로 렌더한 각각의 자식을 대조해서 컴포넌트의 `name`을 확인하고 나서 `constructor`와 몇 가지 다른 프로퍼티를 확인합니다.
-
-이전 단락에서 언급했던 것처럼, `name` 프로퍼티는 컴포넌트를 넘겼을 때 `find`로 확인하는 방법의 하나입니다. 컴포넌트를 넘겨주는 대신, 간단하게 올바른 `name` 프로퍼티를 가진 객체를 넘겨줄 수도 있습니다. 이 방법은 컴포넌트를 `import` 할 필요가 없음을 의미합니다. `<Child>`를 렌더하는 경우를 테스트해보겠습니다.
-
-``` js
-it("renders a Child component", () => {
-  const wrapper = shallowMount(Parent, {
-    data() {
-      return { showChild: true }
+it('마운트로 렌더하고 API 호출을 초기화합니다.', () => {
+	const wrapper = mount(ParentWithAPICallChild, {
+    stubs: {
+      ComponentWithAsyncCall: true
     }
   })
   
-  expect(wrapper.find({ name: "Child"}).exists()).toBe(true)
+  expect(wrapper.find(ComponentWithAsyncCall).exists()).toBe(true)
 })
 ```
 
-테스트가 통과합니다! `name` 프로퍼티를 사용하면 약간 직관적이지 않을 수는 있습니다. 그래서 대안으로 실제로 컴포넌트를 추출하는 방법을 사용합니다. 또 다른 옵션은  처음 두 가지 예제에서 보여준 `querySelector` 스타일 문법을 사용해서 간단하게 `class`나 `id`를 추가하고 쿼리(query)를 추가하는 것입니다.
+`yarn test:unit`을 실행할 때 테스트는 여전히 통과하지만, `console.log`는 어디에서도 볼 수 없습니다. `stubs`에서 `[component]: true`를 넘겨서 stub으로 기존 컴포넌트를 대체했기 때문입니다. 외부 인터페이스는 여전히 같습니다. (여전히 `find`를 이용해서 선택할 수 있습니다. 왜냐하면  `find`에 의해 내부적으로 사용되는 `name` 프로퍼티는 여전히 같기 때문입니다) `makeApiCall`같은 내부 메서드는 어떤 일도 하지 않는 더미 메서드로 대체됩니다. 내부 메서드는 '없어졌습니다(stubbed out)'.
+
+원한다면 스텁을 사용해서 마크업을 지정할 수도 있습니다.
+
+```js
+const wrapper = mount(ParentWithAPICallChild, {
+  stubs: {
+    ComponentWithAsyncCall: "<div class='stub'></div>"
+  }
+})
+```
 
 
 
-## `findAll`
+## `shallowMount`로 자동으로 스터빙
 
 ---
 
-종종 여러 엘리먼트가 렌더됐는지 어설트 하기를 원하는 경우가 있을 수 있습니다. 일반적인 경우는 `v-for`로 렌더한 아이템의 리스트입니다. 아래에 몇 가지 `<Child>` 컴포넌트를 렌더한 `<ParentWithManyChildren>` 컴포넌트가 있습니다.
-
-``` vue
-<template>
-	<div>
-    <Child v-for="id in [1, 2, 3]" :key="id">
-  </div>
-</template>
-
-<script>
-import Child from "./Child.vue"
-  
-export default {
-  name: "ParentWithManyChildren",
-  
-  components: { Child }
-}
-</script>
-```
-
-아래와 같이 3개의 `<Child>` 컴포넌트가 렌더됐는지 어설트하기 위해서  `findAll`을 사용해서 테스트를 작성할 수 있습니다.
+`mount`를 사용하는 대신에 수동으로 `<ComponentWithAsyncCall>`을 스터빙 하려면, 간단하게 `shallowMount`를 사용할 수 있습니다. `shallowMount`는 디폴트로 다른 컴포넌트를 자동으로 스텁합니다. `shallowMount`를 사용한 테스트는 아래와 같습니다.
 
 ``` js
-it("renders many children", () => {
-  const wrapper = shallowMount(ParentWithManyChildren)
+it('shallowMount로 렌더하고 API 호출을 초기화하지 않습니다.', () => {
+  const wrapper = shallowMount(ParentWithAPICallChild)
   
-  expect(wrapper.findAll(Child).length).toBe(3)
+  expect(wrapper.find(ComponentWithAsyncCall).exists()).toBe(true)
 })
 ```
 
-`yarn test:unit`을 실행하면 테스트가 통과하는 모습을 보여줍니다. 마찬가지로 `findAll`과 함께 `querySelector`를 사용할 수 있습니다.
+`yarn test:unit`을 실행하면 어떤 `console.log`도 보이지 않고 테스트가 통과합니다. `shallowMount`는 자동으로 `<ComponentWithAsyncCall>`을 스텁합니다. `shallowMount`는 `created`나 `mounted` 등과 같은 라이프사이클 훅에 연결된 동작을 가진 자식 컴포넌트를 많이 가진 컴포넌트를 테스트할 때 유용합니다. 저는  `mount`를 사용할 좋은 이유가 없다면, 디폴트로 `shallowMount`를 사용하는 경향이 있습니다. 무엇을 사용할지는 여러분이 어떤 경우에 사용하고, 어떤 것을 테스트하는지에 달려있습니다.
 
 
 
@@ -201,10 +188,8 @@ it("renders many children", () => {
 
 ---
 
-이 페이지는 아래의 내용을 다룹니다.
+- `stubs`는 현재 유닛 테스트와 관련 없는 자식의 행동을 스터빙 할 때 유용합니다.
+- `shallowMount`는 디폴트로 자식 컴포넌트를 스텁합니다.
+- 기본 스텁을 만들기 위해 `true`를 넘기거나 여러분이 작성한 커스텀 구현체를 넘길 수 있습니다.
 
-- `querySelector` 문법과 함께 `find`와 `findAll` 사용하기
-- `isVisible`과 `exists`
-- 셀렉터로 컴포넌트 또는 name과 함께 `find`와 `findAll` 사용하기
-
-이 페이지에서 설명한 테스트의 소스 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/tree/master/demo-app/tests/unit/Parent.spec.js)서 찾을 수 있습니다.
+이 페이지에서 설명한 테스트는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/tests/unit/ParentWithAPICallChild.spec.js)서 찾을 수 있습니다.
