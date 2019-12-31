@@ -1,5 +1,5 @@
-@import "../../../assets/scss/variables";
-@import "../../../assets/scss/mixins";
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
 
 .content {
   max-width: $layout-post-single-width;
@@ -73,7 +73,7 @@
       & p {
         font-size: $typographic-base-font-size * 1.05;
         @include line-height(1.05);
-        @include margin-bottom(1.05);
+        @include margin-bottom(0.6);
       }
     }
   }

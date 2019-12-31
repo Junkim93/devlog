@@ -36,23 +36,32 @@ h1 {
 }
 
 h2 {
-  font-size: $typographic-base-font-size * 1.6875;
+  font-size: $typographic-base-font-size * 1.7875;
+  color: #00192e;
   @include line-height(1.5);
-  @include margin-top(2);
+  @include margin-top(1.5);
   @include margin-bottom(0);
+
+  > code {
+    font-size: 1.2rem !important;
+    font-weight: 400 !important;
+    background-color: #ebe8e8 !important;
+    color: #004a8c !important;
+  }
 }
 
 h3 {
   font-size: $typographic-base-font-size * 1.375;
+  color: #47474b;
   @include line-height(1);
-  @include margin-top(2);
+  @include margin-top(1);
   @include margin-bottom(0);
 }
 
 h4 {
   font-size: $typographic-base-font-size * 1.2;
   @include line-height(1);
-  @include margin-top(1.5);
+  @include margin-top(1);
   @include margin-bottom(0);
 }
 
@@ -128,6 +137,12 @@ ul {
 p {
   @include line-height(1);
   @include margin-bottom(1);
+
+  > code {
+    font-weight: 400 !important;
+    background-color: #ebe8e8c9 !important;
+    color: #03569eda !important;
+  }
 }
 
 blockquote {
