@@ -3,7 +3,7 @@ title: "(번역) Vue Testing: Vuex-getters 테스트"
 date: "2019-12-28T16:20:33.969Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue12"
+slug: "/posts/testingvue13"
 category: "Vue.js"
 tags:
   - "Vue.js"
