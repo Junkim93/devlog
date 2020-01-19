@@ -1,5 +1,5 @@
 ---
-title: "(번역) Vue Testing: 컴포넌트 내에 있는 Vuex - Mutations와 Actions"
+title: "(번역) Vue 테스트 코드 작성: 컴포넌트 내에 있는 Vuex - Mutations와 Actions"
 date: "2019-12-30T14:32:14.644Z"
 template: "post"
 draft: false

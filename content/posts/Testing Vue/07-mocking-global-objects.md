@@ -1,5 +1,5 @@
 ---
-title: "(번역) Vue Testing: 전역 객체 mocking"
+title: "(번역) Vue 테스트 코드 작성: 전역 객체 mocking"
 date: "2019-12-09T12:26:41.561Z"
 template: "post"
 draft: false

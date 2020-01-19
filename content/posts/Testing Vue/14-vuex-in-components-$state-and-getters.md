@@ -1,5 +1,5 @@
 ---
-title: "(번역) Vue Testing: 컴포넌트 내에 있는 Vuex - $state와 getters"
+title: "(번역) Vue 테스트 코드 작성: 컴포넌트 내에 있는 Vuex - $state와 getters"
 date: "2019-12-19T14:25:06.166Z"
 template: "post"
 draft: false

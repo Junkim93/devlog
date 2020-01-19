@@ -1,9 +1,9 @@
 ---
-title: "(번역) Vue 테스트 코드 작성: 컴포지션 API"
-date: "2020-01-07T13:45:11.279Z"
+title: "(번역) Vue 테스트 코드 작성: 보일러 플레이트 줄이기"
+date: "2020-01-19T23:46:09.730Z"
 template: "post"
-draft: false
-slug: "/posts/testingvue17"
+draft: true
+slug: "/posts/testingvue18"
 category: "Vue.js"
 tags:
   - "Vue.js"

@@ -1,5 +1,5 @@
 ---
-title: "(번역) Vue Testing: Props 테스트하기"
+title: "(번역) Vue 테스트 코드 작성: Props 테스트하기"
 date: "2019-11-19T12:13:46.137Z"
 template: "post"
 draft: false

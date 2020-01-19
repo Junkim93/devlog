@@ -1,5 +1,5 @@
 ---
-title: "(번역) Vue Testing: Computed 프로퍼티"
+title: "(번역) Vue 테스트 코드 작성: Computed 프로퍼티"
 date: "2019-11-20T12:06:54.551Z"
 template: "post"
 draft: false

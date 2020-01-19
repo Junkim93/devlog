@@ -1,5 +1,5 @@
 ---
-title: "(번역) Vue Testing: 엘리먼트와 컴포넌트 찾기"
+title: "(번역) Vue 테스트 코드 작성: 엘리먼트와 컴포넌트 찾기"
 date: "2019-12-13T10:55:29.271Z"
 template: "post"
 draft: false

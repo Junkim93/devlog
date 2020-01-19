@@ -1,5 +1,5 @@
 ---
-title: "(번역) Vue Testing: TDD를 위한 설정하기"
+title: "(번역) Vue 테스트 코드 작성: TDD를 위한 설정하기"
 date: "2019-11-14T14:24:59.828Z"
 template: "post"
 draft: false
