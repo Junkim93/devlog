@@ -22,9 +22,9 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 ------
 
-이 페이지에서 설명한 테스트는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/tests/unit/NumberRenderer.spec.js)서 찾을 수 있습니다.
+이 페이지에서 설명한 테스트는 [여기](https://github.com/lmiller1990/vue-testing-handbook/tree/master/demo-app/tests/unit/NumberRenderer.spec.js)서 찾을 수 있습니다.
 
-Computed 프로퍼티를 테스트 하는 일은 간단합니다. 기존의 순수 자바스크립트 함수와 같기 때문입니다.
+computed 프로퍼티를 테스트 하는 일은 더 간단합니다. 기존의 순수 자바스크립트 함수와 같기 때문입니다.
 
 `computed`  프로퍼티를 테스트 하는 두 가지 방법을 살펴보겠습니다. 먼저 `<NumberRender>`라는 컴포넌트를 만들겠습니다. 해당 컴포넌트는 `numbers`라는 computed 프로퍼티를 바탕으로 홀수나 짝수를 렌더합니다.
 
@@ -83,7 +83,7 @@ describe("NumberRenderer", () => {
 </script>
 ```
 
-이제 개발을 시작하고, 오류 메세지가 구현을 안내해주도록 하겠습니다. `yarn test:unit`을 실행하겠습니다.
+이제 개발을 시작하고, 오류 메세지가 구현을 안내해주도록 하겠습니다. `yarn test:unit`은 아래 내용을 산출합니다.
 
 ```
 ● NumberRenderer › renders even numbers
@@ -122,7 +122,7 @@ computed: {
 </template>
 ```
 
-이제 `yarn test:unit`을 실행합니다.
+이제 `yarn test:unit`은 아래의 결과를 산출합니다.
 
 ```
 FAIL  tests/unit/NumberRenderer.spec.js
@@ -153,7 +153,7 @@ return evens.join(", ")
 
 ---
 
-이제 `even: false`인 경우의 테스트를 추가 해보겠습니다. 이번에는 컴포넌트를 실제로 렌더링 하지 않고, computed 프로퍼티를 테스트 하는 다른 방법을 보겠습니다.
+이제 `even: false`인 경우의 테스트를 추가 해보겠습니다. 이번에는 컴포넌트를 실제로 렌더링 하지 않고, computed 프로퍼티를 테스트 하는 다른 방법을 알아보겠습니다.
 
 테스트의 시작은 아래와 같습니다.
 
@@ -165,9 +165,9 @@ it("renders odd numbers", () => {
 })
 ```
 
-컴포넌트를 렌더하고 `wrapper.text()`에 assertion을 하는 대신에, `call`을 사용하고 있습니다. call은  `numbers`에 있는 `this` 컨텍스트의 대안을 제공합니다. 통과하는 테스트를 작성한 후에, `call`을 사용하지 않으면 어떤 일이 일어나는지 살펴보겠습니다.
+컴포넌트를 렌더하고 `wrapper.text()`에 어설션(assertion) 하는 대신에, `call`을 사용하고 있습니다. call은  `numbers`에 대체할 `this` 컨텍스트를 제공합니다. 통과하는 테스트를 얻은 후에, `call`을 사용하지 않으면 어떤 일이 일어나는지 살펴보겠습니다.
 
-현재 테스트를 실행한 결과는 아래와 같습니다.
+현재 테스트를 실행하면 아래의 결과를 산출합니다.
 
 ```
 FAIL  tests/unit/NumberRenderer.spec.js
@@ -198,7 +198,7 @@ numbers() {
 }
 ```
 
-이제 두 개의 테스트를 모두 통과합니다. 그런데 두 번째 테스트에서 `call`을 사용하지 않았다면 어떻게 됐을까요? 아래와 같이 두 번째 테스트를 업데이트 해보겠습니다.
+이제 두 개의 테스트 모두 통과합니다. 그런데 두 번째 테스트에서 `call`을 사용하지 않았다면 어떻게 됐을까요? 아래와 같이 두 번째 테스트를 업데이트 해보겠습니다.
 
 ```js
 it("renders odd numbers", () => {
@@ -234,12 +234,12 @@ FAIL  tests/unit/NumberRenderer.spec.js
 
 ---
 
-위에서 설명한 기술은 computed 프로퍼티를 테스트하는데 모두 용이합니다. Call은 아래와 같은 경우에 유용합니다.
+위에서 설명한 두 테크닉 모두 computed 프로퍼티를 테스트하는데 용이합니다. Call은 아래와 같은 경우에 유용합니다.
 
-- computed 유닛 테스트에서 실행하는 일을 피하고 싶은 라이프사이클 메서드에서, 시간을 약간 소비하는 작업을 가진 컴포넌트를 테스트 하는 경우에 유용합니다.
-- 몇 가지 값을 `this에` 고정(역주: 원문은 stub out이란 포현을 사용했습니다)하고 싶으면 `call`을 사용해서 넘겨주는 커스텀 컨텍스트가 유용합니다.
+- 라이프사이클 메서드에서 시간이 많이 소요되는 작업을 수행하는 컴포넌트를 테스트해서, computed 유닛 테스트를 별도로 실행하고 싶을 때 유용합니다.
+- 몇 가지 값을 `this`에 고정하고 싶으면 `call`을 사용해서 커스텀 컨텍스트를 넘겨주는 게 유용합니다
 
-물론 값이 정확하게 렌더링 된다고 확신할 수 있기를 원할 것입니다. 그래서 computed 프로퍼티를 테스트 할때 올바른 기술을 선택해야 합니다. 모든 엣지 케이스를 테스트하세요.
+물론 값이 정확하게 렌더 된다고 확신할 수 있기를 원할 것입니다. 그래서 computed 프로퍼티를 테스트 할때 올바른 기술을 선택해야 합니다. 그리고 모든 엣지 케이스를 테스트하세요.
 
 
 
@@ -247,8 +247,8 @@ FAIL  tests/unit/NumberRenderer.spec.js
 
 ------
 
-- computed 프로퍼티는 렌더된 마크업에 assertions 하는데 `shallowMount`를 사용할 수 있습니다.
-- 복잡한 computed 프로퍼티는 `call`을 사용해서 독립적으로 테스트 할 수 있습니다.
+- computed 프로퍼티는 렌더된 마크업에 `shallowMount`를 사용해서 어설션 할 수 있습니다.
+- 복잡한 computed 프로퍼티는 `call`을 사용해서 독립적으로 테스트 할 수 있습니다
 
 
 
