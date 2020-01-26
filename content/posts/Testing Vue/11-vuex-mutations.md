@@ -18,7 +18,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 
 
-## Mutation 테스트
+## 뮤테이션 테스트하기
 
 ---
 
@@ -28,13 +28,13 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 
 
-## Mutation 만들기
+## 뮤테이션 생성하기
 
 ---
 
-Mutation은 일정한 패턴을 따르는 경향이 있습니다. 몇 가지 데이터를 얻기 위해서, 몇 가지 프로세스를 거치고, 그러고 나서 상태(state)에 데이터를 할당합니다.  `ADD_POST` mutation의 개요는 다음과 같습니다. ADD_POST mutation은 한번 실행했을 때, 페이로드(payload)에서  `post` 객체를 받습니다. 그리고 `post.id`를 `state.postIds`에 추가합니다. 키 값이 `post.id`인  `state.posts` 객체에 post.id도 추가합니다. 이런 형태는 Vuex를 사용하는 앱의 일반적인 패턴입니다.
+뮤테이션은 일정한 패턴을 따르는 경향이 있습니다. 몇 가지 데이터를 얻기 위해서, 몇 가지 프로세스를 거치고, 그러고 나서 상태(state)에 데이터를 할당합니다.  `ADD_POST` 뮤테이션의 개요는 다음과 같습니다. ADD_POST 뮤테이션은 한번 실행했을 때, 페이로드(payload)에서  `post` 객체를 받습니다. 그리고 `post.id`를 `state.postIds`에 추가합니다. 키 값이 `post.id`인 `state.posts` 객체에 post.id도 추가합니다. 이런 형태는 Vuex를 사용하는 앱의 일반적인 패턴입니다.
 
-TDD로 개발 해보겠습니다. mutation의 시작은 아래와 같습니다.
+TDD로 개발 해보겠습니다. 뮤테이션의 시작은 아래와 같습니다.
 
 ``` js
 export default {
@@ -67,7 +67,7 @@ describe("SET_POST", () => {
 })
 ```
 
-`yarn test:unit`으로 테스트를 실행하면 아래와 같은 실패 메세지를 뱉어냅니다.
+`yarn test:unit`으로 테스트를 실행하면 아래와 같은 실패 메세지를 산출합니다.
 
 ```
 FAIL  tests/unit/mutations.spec.js
@@ -91,7 +91,7 @@ export default {
 }
 ```
 
-이제 `yarn test:unit`은 아래와 같은 메세지를 뱉어냅니다.
+이제 `yarn test:unit`은 아래와 같은 메세지를 산출합니다.
 
 ```
 Expected value to equal:
@@ -119,11 +119,11 @@ export default {
 
 ---
 
-Vuex mutation을 테스트 할 때는 vue나 vuex에서 어떤 특별한 것도 필요하지 않습니다. Vuex mutation이 단지 일반적인 자바스크립트 함수기 때문입니다. 유의해야 하는 유일한 부분은 Vue의 반응성 경고입니다. 이 경고는 Vuex에도 마찬가지로 적용됩니다. 반응성 시스템과 일반적인 경고에 대해 좀 더 자세히 알고 싶다면 [여기](https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats)서 해당 내용에 대해 읽을 수 있습니다.
+Vuex 뮤테이션을 테스트 할 때는 Vue나 Vuex에서 어떤 특별한 것도 요구하지 않습니다. Vuex 뮤테이션이 단지 일반적인 자바스크립트 함수이기 때문입니다. 유의해야 하는 유일한 부분은 Vue의 반응성 경고입니다. 이 경고는 Vuex에도 마찬가지로 적용됩니다. 반응성 시스템과 일반적인 경고에 대해 좀 더 자세히 알고 싶다면 [여기](https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats)에서 해당 내용에 대해 읽을 수 있습니다.
 
-이 페이지는 아래와 같은 내용에 대해 논했습니다.
+이 페이지는 아래와 같은 내용에 대해 다뤘습니다.
 
-- Vuex mutation은 일반 자바스크립트 함수이다
-- Mutation은 main Vue app에서 독립적으로 테스트할 수 있어야한다.
+- Vuex 뮤테이션은 일반 자바스크립트 함수이다
+- 뮤테이션은 main Vue app에서 독립적으로 테스트할 수 있으며, 테스트해야 한다.
 
 위 예제에서 사용한 테스트는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/tests/unit/mutations.spec.js)서 찾을 수 있습니다.
