@@ -30,7 +30,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 ---
 
-일반적인 Vue app에서는 `Vue.use(Vuex)`를 사용해서 Vuex를 설치합니다. 그러고나서 app에 새로운 Vuex 스토어(store)를 넘깁니다. 유닛 테스트에서 같은 행위를 한다면, 모든 유닛 테스트는 Vuex store를 받을 것입니다. 심지어 스토어를 사용하지 않는 테스트도요. `vue-test-utils`는 `createLocalVue` 메서드를 제공하고, 이 메서드는 테스트에 사용할 임시의 `Vue` 인스턴스를 제공합니다. 어떻게 사용하는지 알아보겠습니다. 먼저 스토어의 기본 상태(state)에서 username을 렌더하는 간단한 `<ComponentWithGetter>` 컴포넌트입니다.
+일반적인 Vue app에서는 `Vue.use(Vuex)`를 사용해서 Vuex를 설치합니다. 그러고나서 app에 새로운 Vuex 스토어(store)를 넘깁니다. 유닛 테스트에서 같은 행위를 한다면, 모든 유닛 테스트는 Vuex 스토어를 받을 것입니다. 심지어 스토어를 사용하지 않는 테스트도요. `vue-test-utils`는 `createLocalVue` 메서드를 제공하고, 이 메서드는 테스트 기준으로 사용할 임시 `Vue` 인스턴스를 제공합니다. 어떻게 사용하는지 알아보겠습니다. 먼저 스토어의 기본 상태(state)에서 username을 렌더하는 간단한 `<ComponentWithGetter>` 컴포넌트입니다.
 
 ``` html
 <template>
@@ -54,7 +54,7 @@ export default {
 </script>
 ```
 
-임시의 Vue 인스턴스를 생성하기 위해서 `createLocalVue`를 사용하고 Vuex를 설치할 수 있습니다. 그러고나서 간단하게 컴포넌트의 마운팅 옵션에 새로운 `store`를 넘깁니다. 전체 테스트는 아래와 같습니다.
+임시의 Vue 인스턴스를 생성하기 위해서 `createLocalVue`를 사용하고 Vuex를 설치할 수 있습니다. 그러고나서 간단하게 컴포넌트의 마운팅 옵션에 새로운 `스토어`를 넘깁니다. 전체 테스트는 아래와 같습니다.
 
 ``` js
 import Vuex from "vuex"
@@ -71,7 +71,7 @@ const store = new Vuex.Store({
 })
 
 describe("ComponentWithVuex", () => {
-  it("renders a username using a real Vuex store", () => {
+  it("실제 Vuex 스토어를 사용해서 username을 렌더한다", () => {
     const wrapper = shallowMount(ComponentWithVuex, {
       store,
       localVue
@@ -82,18 +82,18 @@ describe("ComponentWithVuex", () => {
 })
 ```
 
-테스트가 통과합니다. 새로운  `localVue`를 만드는 것은 약간의 보일러플레이트를 생산하고 테스트가 꽤 길어집니다. Vuex 스토어를 사용하는 컴포넌트가 많다면, `mocks` 마운팅 옵션을 사용하는 것이 대안이 될 수 있습니다. 간단하게 스토어를 mock 하세요.
+테스트가 통과합니다. 새로운 `localVue`를 만드는 것은 약간의 보일러플레이트를 생산하고 테스트가 꽤 길어집니다. Vuex 스토어를 사용하는 컴포넌트가 많다면, `mocks` 마운팅 옵션을 사용하는 것이 대안이 될 수 있습니다. 간단하게 스토어를 mock 하세요.
 
 
 
-## mock 스토어 사용
+## mock 스토어 사용하기
 
 ---
 
 `mocks` 마운팅 옵션을 사용하면 전역 `$store` 객체를 mock 할 수 있습니다.  `createLocalVue`를 사용하거나 새로운 Vuex 스토어를 만들 필요가 없음을 의미합니다. 이 테크닉을 사용해서 위에 있는 테스트를 아래와 같이 다시 써보겠습니다.
 
 ``` js
-it("renders a username using a mock store", () => {
+it("mock 스토어를 사용하여 username을 렌더한다", () => {
   const wrapper = shallowMount(ComponentWithVuex, {
     mocks: {
       $store: {
@@ -136,7 +136,7 @@ export default {
 </script>
 ```
 
-컴포넌트가 user의 `fullname`을 올바르게 렌더했는지 어설트(assert) 하기를 원합니다. 이 테스트를 위해, `fullname`이 어디서 오는지 신경쓰지 않겠습니다. 단지 컴포넌트 렌더가 올바른지만 확인할 것입니다.
+컴포넌트가 user의 `fullname`을 올바르게 렌더했는지 어설트(assert) 하기를 원합니다. 이 테스트를 위해, `fullname`이 어디서 오는지는 신경쓰지 않겠습니다. 단지 컴포넌트를 렌더한 결과가 올바른지만 확인할 것입니다.
 
 먼저 실제 Vuex 스토어와 `createLocalVue`를 사용한 테스트는 아래와 같습니다.
 
@@ -162,20 +162,40 @@ it("실제 Vuex getter를 사용해서 username를 렌더한다", () => {
 })
 ```
 
-테스트는 매우 짧습니다. 단지 두 줄의 코드뿐입니다. 연관된 설정이 많긴 하지만, 기본적으로 Vuex store를 다시 구축 하는 것입니다. 이 방법의 대안은 실제 Vuex store를 실제 getter와 같이 import 하는 것입니다. 이 방법은 테스트에 대한 또 다른 의존을 불러 일으킵니다. 그리고 큰 시스템을 개발할 때, Vuex 스토어를 다른 개발자가 구현하고 있으며. 아직 구현되지 않았을 수도 있습니다.
+테스트가 매우 간단합니다. 단지 두 줄의 코드뿐입니다. 연관된 설정이 많긴 하지만, 기본적으로 Vuex 스토어를 다시 구축 하는 것입니다. 이 방법의 대안은 실제 Vuex 스토어를 실제 게터와 같이 import 하는 것입니다. 이 방법은 테스트에 대한 또 다른 의존을 불러 일으킵니다. 그리고 큰 시스템을 개발할 때, Vuex 스토어를 다른 개발자가 구현하고 있거나. 아직 구현되지 않았을 수도 있습니다.
 
-`mocks` 마운팅 옵션을 사용해서 테스트를 쓰는 방법을 알아보겠습니다.
+`mocks` 마운팅 옵션을 사용해서 테스트를 작성하는 방법을 알아보겠습니다.
+
+```js
+it("computed 마운팅 옵션을 사용해서 username을 렌더한다", () => {
+  const wrapper = shallowMount(ComponentWithGetters, {
+    mocks: {
+      $store: {
+        getters: {
+          fullname: "Alice Doe"
+        }
+      }
+    }
+  })
+
+  expect(wrapper.find(".fullname").text()).toBe("Alice Doe")
+})
+```
+
+이제 필요한 모든 데이터가 테스트에 포함되어 있습니다. 훌륭합니다! 저는 이렇게 하는 방식을 정말 선호합니다. 테스트가 모든 것을 포함하고 있고, 컴포넌트가 어떤 것을 해야하는지를 이해하기 위해 필요한 모든 지식도 테스트에 포함되어 있기 때문입니다.
+
+`computed` 마운팅 옵션을 사용하면, 테스트를 좀 더 명료하게 만들 수 있습니다.
 
 
 
-## `computed`를 사용해서 getters 모킹
+## `computed`를 사용해서 게터 모킹하기
 
 ---
 
-Getters는 일반적으로 `computed` 프로퍼티에 감싸져 있습니다. 기억하세요. 이 테스트는 컴포넌트가 주어진 현재 스토어의 상태에서 올바르게 행동하는지 확인하는 일이 목적입니다. `fullname`의 구현체를 테스트하지 않습니다. 또는 `getters`가 작동하는지 보려는 것이 아닙니다. 이 말은 `computed` 마운팅 옵션을 사용해서 간단하게 실제 store나 mock store로 대체할 수 있음을 의미합니다. 테스트는 아래와 같이 다시 쓸 수 있습니다.
+게터는 일반적으로 `computed` 프로퍼티에 감싸져 있습니다. 기억하세요. 이 테스트는 컴포넌트가 현재 스토어에 주어진 상태에서 정확하게 행동하는지 확인하는 것이 전부입니다. `fullname`의 구현체를 테스트하지 않습니다. 또는 `게터`가 작동하는지 보려는 것이 아닙니다. 이 말은 `computed` 마운팅 옵션을 사용해서 간단하게 실제 스토어나 mock 스토어로 대체할 수 있음을 의미합니다. 테스트는 아래와 같이 다시 쓸 수 있습니다.
 
 ``` js
-it("computed 마운팅 옵션을 사용해서 username 렌더", () => {
+it("computed 마운팅 옵션을 사용해서 username 렌더한다", () => {
   const wrapper = shallowMount(ComponentWithGetters, {
     computed: {
       fullname: () => "Alice Doe"

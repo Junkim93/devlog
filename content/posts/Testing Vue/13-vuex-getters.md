@@ -45,7 +45,7 @@ const state = {
 
 
 
-## Getters 만들기
+## 게터 생성하기
 
 ---
 
@@ -77,7 +77,7 @@ computed: {
 
 
 
-## 테스트 작성
+## 테스트 작성하기
 
 ---
 
@@ -94,7 +94,7 @@ const dogs = [
 const state = { dogs }
 
 describe("poodles", () => {
-  it("returns poodles", () => {
+  it("poodles를 반환한다", () => {
     const actual = getters.poodles(state)
     
     expect(actual).toEqual([ dogs[0], dogs[2] ])
@@ -102,13 +102,13 @@ describe("poodles", () => {
 })
 ```
 
-Vuex는 자동으로 getter에 `state`를 넘깁니다. getters를 별개로 테스트하고 있기 때문에, 수동으로 `state`를 넘겨야만 합니다. 그거말고는 일반적인 자바스크립트를 테스트 하는 것일 뿐입니다.
+Vuex는 자동으로 게터에 `state`를 넘깁니다. 게터를 독립적으로 테스트하고 있기 때문에, 수동으로 `state`를 넘겨야만 합니다. 그거말고는 일반적인 자바스크립트를 테스트 하는 것과 같습니다.
 
-`poodlesByAge`는 약간 더 흥미롭습니다. getter의 두 번째 인자는 다른 `getters` 입니다. `poodlesByAge`를 테스트하고 있기에, `poodles`의 구현체가 연관되기를 원하지 않습니다. 대신해서 `getters.poodles`를 스텁(stub) 할 수 있습니다. 이렇게 함으로써 테스트를 좀 더 매끄럽게 통제할 수 있도록 해줄 것입니다.
+`poodlesByAge`는 좀 더 흥미롭습니다. 게터의 두 번째 인자는 다른 `게터` 입니다. `poodlesByAge`를 테스트하고 있기에, `poodles`의 구현체가 연관되기를 원하지 않습니다. 대신해서 `getters.poodles`를 스텁(stub) 할 수 있습니다. 이렇게 함으로써 테스트를 좀 더 매끄럽게 통제할 수 있도록 해줄 것입니다.
 
 ``` js
 describe("poodlesByAge", () => {
-  it("returns poodles by age", () => {
+  it("age에 따라 poodles를 반환한다", () => {
     const poodles = [ dogs[0], dogs[2] ]
     const actual = getters.poodlesByAge(state, { poodles })(1)
     
@@ -117,17 +117,19 @@ describe("poodlesByAge", () => {
 })
 ```
 
-실제로 진짜 `poodles` getter를 넘기는 대신에, poodles getter를 리턴한 결과를 넘깁니다. getter를 위한 테스트를 작성했기 때문에, poodles getter가 작동한다는 것을 이미 알고있습니다. 이렇게 함으로써  `poodlesByAge`만의 로직을 집중해서 테스트 할 수 있도록 해줍니다.
+실제로 진짜 `poodles` 게터를 넘기는 대신에, poodles 게터를 리턴한 결과를 넘깁니다. 게터를 위한 테스트를 작성했기 때문에, poodles 게터가 작동한다는 것을 이미 알고있습니다. 이렇게 함으로써  `poodlesByAge`만의 로직을 집중해서 테스트 할 수 있도록 해줍니다.
 
-`async` getters를 가지는 것도 가능합니다. `async` 액션(actions)처럼 같은 테크닉을 이용해서 테스트할 수 있습니다. 이 부분에 대해서는 [여기](https://lmiller1990.github.io/vue-testing-handbook/vuex-actions.html)서 읽을 수 있습니다.
+`async` 게터를 가지는 것도 가능합니다. `async` 액션처럼 같은 테크닉을 이용해서 테스트할 수 있습니다. 이 부분에 대해서는 [여기](https://lmiller1990.github.io/vue-testing-handbook/vuex-actions.html)에서 읽을 수 있습니다.
+
+
 
 ## 결론
 
 ---
 
-- `getter`는 그저 일반 자바스크립트 함수입니다.
-- `getter`를 별개로 테스트할 때, 상태(state)를 수동으로 넘겨야 합니다.
-- getter가 또 다른 getter를 사용한다면 처음 getter의 예상 리턴 결과를 스텁(stub) 해야 합니다. 이렇게 하면 테스트를 좀 더 매끄럽게 통제할 수 있고 문제가 되고 있는 getter를 테스트하는데 집중할 수 있도록 해줍니다.
+- `게터`는 그저 일반 자바스크립트 함수입니다.
+- `게터`를 별개로 테스트할 때, 상태를 수동으로 넘겨야 합니다.
+- 게터가 또 다른 게터를 사용한다면 처음 게터의 예상 반환 결과를 스텁 해야 합니다. 이렇게 하면 테스트를 좀 더 매끄럽게 통제할 수 있고, 문제가 되고 있는 게터를 테스트하는데 집중할 수 있도록 해줍니다.
 
 이 페이지에서 설명한 테스트의 소스 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/tests/unit/getters.spec.js)서 찾을 수 있습니다.
 

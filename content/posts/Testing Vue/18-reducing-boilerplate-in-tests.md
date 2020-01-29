@@ -36,7 +36,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 ---
 
-아래의 코드가 테스트할 컴포넌트입니다.  `message` prop이 보이고, 한 태그가 받고 있습니다. 사용자가 인증된 상태이고, 몇 개의 포스트를 가지고 있다면 새로운 Post 버튼을 보여줍니다.  `authenticated`와 `posts` 객체 둘 다 Vuex 스토어에서 받습니다. 결과적으로 포스트의 링크를 보여주는  `router-link` 컴포넌트를 렌더합니다.
+아래의 코드가 테스트할 컴포넌트입니다. `message` prop이 보이고, 한 태그가 받고 있습니다. 사용자가 인증된 상태이고, 몇 개의 포스트를 가지고 있다면 새로운 Post 버튼을 보여줍니다.  `authenticated`와 `posts` 객체 둘 다 Vuex 스토어에서 받습니다. 결과적으로 포스트의 링크를 보여주는 `router-link` 컴포넌트를 렌더합니다.
 
 ``` html
 <template>
@@ -134,7 +134,7 @@ export const createRouter = () => {
 }
 ```
 
-이제 메인 앱은 `import { store } from './store.js'`를 할 수 있고, 테스트에서는 `import { createStore } from './store.js'`를 하고 `const store = createStore()`로 인스턴스를 만듦으로써 매번 스토어의 새로운 복사본을 가질 수 있습니다. 라우터도 동일합니다. 이게 `Posts.vue` 예제에서 하려고 하는 것입니다. 스토어 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/src/createStore.js)서 라우터 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/src/createRouter.js)서 찾을 수 있습니다.
+이제 메인 앱은 `import { store } from './store.js'`를 할 수 있고, 테스트에서는 `import { createStore } from './store.js'`를 하고 `const store = createStore()`로 인스턴스를 만듦으로써 매번 스토어의 새로운 복사본을 가질 수 있습니다. 라우터도 동일합니다. 이게 `Posts.vue` 예제에서 하려고 하는 일입니다. 스토어 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/tree/master/demo-app/src/createStore.js)서 라우터 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/tree/master/demo-app/src/createRouter.js)서 찾을 수 있습니다.
 
 
 
@@ -154,29 +154,45 @@ import { createRouter } from '@/createRouter'
 import { createStore } from '@/createStore'
 
 describe('Posts.vue', () => {
-  it('통과하면 메시지를 렌더한다', () => {
+  it('통과하면 메시지를 렌더한다.', () => {
     const localVue = createLocalVue()
     localVue.use(VueRouter)
     localVue.use(Vuex)
-    
+
     const store = createStore()
     const router = createRouter()
     const message = 'New content coming soon!'
-    
     const wrapper = mount(Posts, {
       propsData: { message },
       store, router,
     })
-    
+
+    expect(wrapper.find("#message").text()).toBe('New content coming soon!')
+  })
+
+  it('posts를 렌더한다', async () => {
+    const localVue = createLocalVue()
+    localVue.use(VueRouter)
+    localVue.use(Vuex)
+
+    const store = createStore()
+    const router = createRouter()
+    const message = 'New content coming soon!'
+
+    const wrapper = mount(Posts, {
+      propsData: { message },
+      store, router,
+    })
+
     wrapper.vm.$store.commit('ADD_POSTS', [{ id: 1, title: 'Post' }])
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.findAll('.post').length).toBe(1)
   })
 })
 ```
 
-모든 조건을 완벽하게 테스트하지는 않습니다. 간단한 예제이고 시작하기에는 충분합니다. 중복과 반복을 주목하세요. 중복과 반복을 제거하겠습니다.
+모든 조건을 완벽하게 테스트하지는 않습니다. 간단한 예제이고 시작하기에는 충분합니다. 중복과 반복에 주목하세요. 중복과 반복을 제거하겠습니다.
 
 
 
@@ -209,7 +225,7 @@ const createTestVue = () => {
 }
 ```
 
-이제 하나의 함수 안에 모든 로직을 캡슐화했습니다.  `store`, `router` 그리고 `localVue`를 반환합니다. `mount` 함수에 인자로 넘기는 데 필요하기 때문입니다.
+이제 하나의 함수 안에 모든 로직을 캡슐화했습니다. `store`, `router` 그리고 `localVue`를 반환합니다. `mount` 함수에 인자로 넘기는 데 필요하기 때문입니다.
 
 `createTestVue`를 사용해서 첫 번째 테스트를 리팩토링한다면, 아래와 같은 모습이 됩니다.
 
@@ -251,7 +267,7 @@ it('posts를 렌더한다', async () => {
 
 ---
 
-위 코드에서 이전 테스트와 수정된 상태를 비교했을 때 확실히 개선이 있었던 반면에, 코드의 반 정도는 아직 중복된 것을 알 수 있습니다. 이 문제를 처리하기 위해서,  `createWrapper`라는 새 메서드를 생성하겠습니다.
+위 코드에서 이전 테스트와 수정된 상태를 비교했을 때 확실히 개선이 있었지만, 코드의 반 정도는 아직 중복된 것을 알 수 있습니다. 이 문제를 처리하기 위해서, `createWrapper`라는 새 메서드를 생성하겠습니다.
 
 ``` js
 const createWrapper = (component, options = {}) => {
@@ -265,7 +281,7 @@ const createWrapper = (component, options = {}) => {
 }
 ```
 
-이제  `createWrapper`를 호출해서, 테스트할 수 있는 컴포넌트의 새 복사본을 가지면 됩니다. 이제는 테스트가 매우 명료합니다.
+이제 `createWrapper`를 호출해서, 테스트할 컴포넌트의 새 복사본을 가지면 됩니다. 이제는 테스트가 매우 명료합니다.
 
 ``` js
 it('통과하면 메시지를 렌더한다', () => {
@@ -289,7 +305,7 @@ it('posts를 렌더한다', async () => {
 
 
 
-## 초기 Vuex 상태 설정
+## 초기 Vuex 상태 설정하기
 
 ---
 
@@ -330,7 +346,7 @@ const createWrapper = (component, options = {}, storeState = {}) => {
 이제 테스트는 아래와 같이 쓸 수 있습니다.
 
 ``` js
-it('renders posts', async () => {
+it('posts를 렌더한다', async () => {
   const wrapper = createWrapper(Posts, {}, {
     posts: [{ id: 1, title: 'Post' }]
   })
@@ -353,7 +369,7 @@ it('renders posts', async () => {
 
 - Vuex의 namespaced 모듈의 초기 상태를 설정하도록 해주는 `createStore` 함수를 업데이트합니다
 - 특정 라우트를 설정하는 `createRouter`를 개선합니다
-- 사용자가 `createWrapper`에  `shallow`나  `mount` 인자를 넘기도록 해줍니다.
+- 사용자가 `createWrapper`에 `shallow`나 `mount` 인자를 넘기도록 해줍니다.
 
 
 
@@ -364,7 +380,7 @@ it('renders posts', async () => {
 이 가이드 문서는 아래의 내용에 관해 얘기했습니다.
 
 - 객체의 새 인스턴스를 얻는 팩토리 함수 사용
-- 일반적인 행동을 추출해서 보일러플레이트와  중복 줄이기
+- 일반적인 행동을 추출해서 보일러플레이트와 중복 줄이기
 
-이 페이지에서 설명한 테스트의 소스 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/blob/master/demo-app/tests/unit/Posts.spec.js)서 찾을 수 있습니다. [Vue.js Courses](https://vuejs-course.com/screencasts/reducing-duplication-in-tests.html?ref=vth)에서 스크린캐스트로 이용할 수도 있습니다.
+이 페이지에서 설명한 테스트의 소스 코드는 [여기](https://github.com/lmiller1990/vue-testing-handbook/tree/master/demo-app/tests/unit/Posts.spec.js)에서 찾을 수 있습니다. [Vue.js Courses](https://vuejs-course.com/screencasts/reducing-duplication-in-tests.html?ref=vth)에서 스크린캐스트로 이용할 수도 있습니다.
 

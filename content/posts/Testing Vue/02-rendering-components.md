@@ -66,7 +66,7 @@ console.log(shallowWrapper.html())
 console.log(mountWrapper.html())
 ```
 
-`mountWrapper.html()`은 아래와 같이 나옵니다.
+`mountWrapper.html()`은 이제 아래의 결과를 산출합니다.
 
 ```html
 <div><div>Child component</div></div>
