@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-// @flow
-import React from "react";
-import Helmet from "react-helmet";
-import type { Node as ReactNode } from "react";
-import styles from "./Layout.module.scss";
-=======
 // @flow strict
 import React from 'react';
 import Helmet from 'react-helmet';
 import type { Node as ReactNode } from 'react';
 import { useSiteMetadata } from '../../hooks';
 import styles from './Layout.module.scss';
->>>>>>> upstream/master
 
 type Props = {
   children: ReactNode,

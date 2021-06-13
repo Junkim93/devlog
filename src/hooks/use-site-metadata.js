@@ -12,27 +12,8 @@ const useSiteMetadata = () => {
               bio
               photo
               contacts {
-<<<<<<< HEAD
-                email
                 github
-=======
-                facebook
-                linkedin
-                github
-                twitter
-                telegram
-                instagram
                 email
-                rss
-                vkontakte
-                line
-                gitlab
-                weibo
-                codepen
-                youtube
-                soundcloud
-                medium
->>>>>>> upstream/master
               }
             }
             menu {
