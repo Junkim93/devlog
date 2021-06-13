@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 전역 객체 모킹"
 date: "2019-12-09T12:26:41.561Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue07"
+slug: "testingvue07"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -144,7 +144,7 @@ VueTestUtils.config.mocks["$t"] = (msg) => translations[locale][msg]
 describe("Bilingual", () => {
   it("renders successfully", () => {
     const wrapper = shallowMount(Bilingual)
-    
+
     console.log(wrapper.html())
   })
 })

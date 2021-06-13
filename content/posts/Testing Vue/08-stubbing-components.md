@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 컴포넌트 스터빙"
 date: "2019-12-10T09:31:02.695Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue08"
+slug: "testingvue08"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -59,10 +59,10 @@ created() {
 
 <script>
 import ComponentWithAsyncCall from "./ComponentWithAsyncCall.vue"
-  
+
 export default {
   name: "ParentWithAPICallChild",
-  
+
   components: {
     ComponentWithAsyncCall
   }
@@ -79,18 +79,18 @@ export default {
 
 <script>
 import axios from "axios"
- 
+
 export default {
   name: "ComponentWithAsyncCall",
-  
+
   created() {
     this.makeApiCall()
   },
-  
+
   methods: {
     async makeApiCall() {
       console.log("Making api call")
-      await axios.get("https://jsonplaceholder.typicode.com/posts/1")
+      await axios.get("https://jsonplaceholder.typicode.com1")
     }
   }
 }
@@ -115,7 +115,7 @@ import ComponentWithAsyncCall from '@/components/ComponentWithAsyncCall.vue'
 describe('ParentWithAPICallChild.vue', () => {
   it('마운트로 렌더하고 API 호출을 초기화합니다.', () => {
     const wrapper = mount(ParentWithAPICallChild)
-    
+
     expect(wrapper.find(ComponentWithAsyncCall).exists()).toBe(true)
   })
 })
@@ -147,7 +147,7 @@ it('마운트로 렌더하고 API 호출을 초기화합니다.', () => {
       ComponentWithAsyncCall: true
     }
   })
-  
+
   expect(wrapper.find(ComponentWithAsyncCall).exists()).toBe(true)
 })
 ```
@@ -175,7 +175,7 @@ const wrapper = mount(ParentWithAPICallChild, {
 ``` js
 it('shallowMount로 렌더하고 API 호출을 초기화하지 않습니다.', () => {
   const wrapper = shallowMount(ParentWithAPICallChild)
-  
+
   expect(wrapper.find(ComponentWithAsyncCall).exists()).toBe(true)
 })
 ```

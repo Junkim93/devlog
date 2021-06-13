@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: Vuex-getters 테스트"
 date: "2019-12-28T16:20:33.969Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue13"
+slug: "testingvue13"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -56,7 +56,7 @@ export default {
   poodles: (state) => {
     return state.dogs.filter(dog => dog.breed === "poodle")
   },
-  
+
   poodlesByAge: (state, getters) => (age) => {
     return getters.poodles.filter(dog => dpg.age === age)
   }
@@ -96,7 +96,7 @@ const state = { dogs }
 describe("poodles", () => {
   it("poodles를 반환한다", () => {
     const actual = getters.poodles(state)
-    
+
     expect(actual).toEqual([ dogs[0], dogs[2] ])
   })
 })
@@ -111,7 +111,7 @@ describe("poodlesByAge", () => {
   it("age에 따라 poodles를 반환한다", () => {
     const poodles = [ dogs[0], dogs[2] ]
     const actual = getters.poodlesByAge(state, { poodles })(1)
-    
+
     expect(actual).toEqual([ dogs[0] ])
 	})
 })

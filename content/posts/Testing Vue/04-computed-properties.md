@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: Computed 프로퍼티"
 date: "2019-11-20T12:06:54.551Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue04"
+slug: "testingvue04"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -55,7 +55,7 @@ describe("NumberRenderer", () => {
         even: true
       }
     })
-    
+
     expect(wrapper.text()).toBe("2, 4, 6, 8")
   })
 })
@@ -72,7 +72,7 @@ describe("NumberRenderer", () => {
 <script>
 	export default {
     name: "NumberRenderer",
-    
+
     props: {
       even: {
         type: Boolean,
@@ -100,13 +100,13 @@ describe("NumberRenderer", () => {
 computed: {
 	numbers() {
     const evens = []
-    
+
     for (let i = 1; i < 10; i++) {
       if (i % 2 === 0) {
         evens.push(i)
       }
     }
-    
+
     return evens
   }
 }
@@ -160,7 +160,7 @@ return evens.join(", ")
 ```js
 it("renders odd numbers", () => {
 	const localThis = { even: false }
-	
+
 	expect(NumberRenderer.computed.numbers.call(localThis)).toBe("1, 3, 5, 7, 9")
 })
 ```
@@ -185,7 +185,7 @@ FAIL  tests/unit/NumberRenderer.spec.js
 numbers() {
 	const evens = []
 	const odds = []
-	
+
 	for (let i = 1; i < 10; i++) {
 		if (i % 2 === 0) {
 			evens.push(i)
@@ -193,7 +193,7 @@ numbers() {
 			odds.push(i)
 		}
 	}
-	
+
 	return this.even === true ? evens.join(", ") : odds.join(", ")
 }
 ```
@@ -203,7 +203,7 @@ numbers() {
 ```js
 it("renders odd numbers", () => {
 	const localThis = { even: false }
-	
+
 	expect(NumberRenderer.computed.numbers()).toBe("1, 3, 5, 7, 9")
 })
 ```

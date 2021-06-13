@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: Props 테스트하기"
 date: "2019-11-19T12:13:46.137Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue03"
+slug: "testingvue03"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -59,7 +59,7 @@ const wrapper = shallowMount(Foo, {
 <script>
 export default {
   name: "SubmitButton",
-  
+
   props: {
     msg: {
     	type: String,
@@ -147,7 +147,7 @@ describe('SubmitButton.vue', () => {
         isAdmin
       }
     })
-    
+
     expect(wrapper.find("span").text()).toBe("Admin Privileges")
     expect(wrapper.find("button").text()).toBe("submit")
   })
@@ -210,16 +210,16 @@ describe("SubmitButton", () => {
   describe("has admin privileges", () => {
     it("renders a message", () => {
       const wrapper = factory();
-      
+
       expect(wrapper.find("span").text()).toBe("Not Authorized")
       expect(wrapper.find("button").text()).toBe("submit")
     })
   })
-  
+
   describe("does not have admin privileges", () => {
     it("renders a message", () => {
       const wrapper = factory({ isAdmin: true })
-      
+
       expect(wrapper.find("span").text()).toBe("Admin Privileges")
       expect(wrapper.find("button").text().toBe("submit"))
     })

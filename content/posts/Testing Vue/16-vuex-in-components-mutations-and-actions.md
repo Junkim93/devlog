@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: Vue 라우터"
 date: "2020-01-05T09:33:29.918Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue16"
+slug: "testingvue16"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -125,10 +125,10 @@ describe("App", () => {
       localVue,
       router
     })
-    
+
     router.push("/nested-route")
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.find(NestedRoute).exists()).toBe(true)
   })
 })
@@ -176,7 +176,7 @@ describe("NestedRoute", () = {
   it("쿼리 스트링으로부터 username을 렌더한다", () => {
   	const username = "alice"
   	const wrapper = shallowMount(NestedRoute)
-						
+
 		expect(wrapper.find(".username").text()).toBe(username)
 	})
 })
@@ -231,7 +231,7 @@ it("쿼리 스트링으로부터 username을 렌더한다", () => {
       }
     }
   })
-  
+
   expect(wrapper.find(".username").text()).toBe(username)
 })
 ```
@@ -324,27 +324,27 @@ describe("beforeEach", () => {
   afterEach(() => {
 		mockModule.bustCache.mockClear()
   })
-  
+
   it("/user로 이동할 때 캐시를 없앤다", () => {
     const to = {
       matched: [{ meta: { shouldBustCache: true } }]
     }
     const next = jest.fn()
-    
+
     beforeEach(to, undefined, next)
-    
+
     expect(mockModule.bustCache).toHaveBeenCalled()
     expect(next).toHaveBeenCalled()
   })
-  
+
   it("/user로 이동할 때 캐시를 없애지 않는다", () => {
     const to = {
       matched: [{ meta: { shouldBustCache: false } }]
     }
     const next = jest.fn()
-    
+
     beforeEach(to, undefined, next)
-    
+
     expect(mockModule.bustCache).not.toHaveBeenCalled()
     expect(next).toHaveBeenCalled()
   })
@@ -368,7 +368,7 @@ describe("beforeEach", () => {
 import { bustCache } from "@/bust-cache.js"
 export default {
   name: "NestedRoute",
-  
+
   beforeRouteLeave(to, from, next) {
     bustCache()
     next()
@@ -391,7 +391,7 @@ it("라우트를 떠날 때 bustCache와 next를 호출한다", async () => {
   const next = jest.fn()
   NestedRoute.beforeRouteLeave.call(wrapper.vm, undefined, undefined, next)
   await wrapper.vm.$nextTick()
-  
+
   expect(mockModule.bustCache).toHaveBeenCalled()
   expect(next).toHaveBeenCalled()
 })

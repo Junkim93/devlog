@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: TDD를 위한 설정하기"
 date: "2019-11-14T14:24:59.828Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue01"
+slug: "testingvue01"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -26,13 +26,13 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 `vue-cli`는 가장 간단하게 시작할 수 있는 방법입니다. 프로젝트를 준비해줄 뿐만 아니라 인기있는 테스트 프레임워크인 Jest의 환경도 설정해줍니다. 아래의 커맨드를 통해 설치해보겠습니다.
 
-``` 
+```
 yarn global add @vue/cli
 ```
 
 또는 npm에서 아래와 같이 입력합니다.
 
-``` 
+```
 npm install -g @vue/cli
 ```
 
@@ -40,7 +40,7 @@ npm install -g @vue/cli
 
 설치가 끝나고 나면, `cd`로 프로젝트에 들어가서 `yarn test:unit` 커맨드를 실행합니다. 전부 잘 작동했다면, 아래와 같은 메세지가 나옵니다.
 
-``` 
+```
 PASS  tests/unit/HelloWorld.spec.js
   HelloWorld.vue
     ✓ renders props.msg when passed (26ms)

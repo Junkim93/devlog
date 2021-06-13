@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 컴포넌트 내에 있는 Vuex - 
 date: "2019-12-30T14:32:14.644Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue15"
+slug: "testingvue15"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -44,7 +44,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 			@click="handleCommit">
       Commit
     </button>
-    
+
     <button
 			class="dispatch"
 			@click="handleDispatch">
@@ -62,16 +62,16 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 <script>
 	export default {
     name: "ComponentWithButtons",
-    
+
     methods: {
       handleCommit() {
         this.$store.commit("testMutation", { msg: "Test Commit" })
       },
-      
+
       handleDispatch() {
         this.$store.dispatch("testAction", { msg: "Test Dispatch" })
       },
-      
+
       handleNamespacedDispatch() {
         this.$store.dispatch("namespaced/very/deeply/testAction", { msg: "Test Namespaced Dispatch" })
       }
@@ -108,15 +108,15 @@ const mutations = {
 const store = new Vuex.Store({ mutations })
 
 describe("ComponentWithButtons", () => {
-  
+
   it("버튼을 클릭했을 때 뮤테이션을 커밋한다", async () => {
     const wrapper = shallowMount(ComponentWithButtons, {
       store, localVue
     })
-    
+
     wrapper.find(".commit").trigger("click")
     await wrapper.vm.$nextTick()
-    
+
     expect(mutations.testMutation).toHaveBeenCalledWith(
     	{},
       { msg: "Test Commit" }
@@ -151,10 +151,10 @@ it("버튼을 클릭했을 때 액션을 디스패치 한다", async () => {
       $store: mockStore
     }
   })
-  
+
   wrapper.find(".dispatch").trigger("click")
   await wrapper.vm.$nextTick()
-  
+
   expect(mockStore.dispatch).toHaveBeenCalledWith(
   	"testAction", { msg: "Test Dispatch" })
 })
@@ -176,14 +176,14 @@ it("버튼을 클릭했을 때 액션을 디스패치 한다", async () => {
 it("버튼을 클릭했을 때 namespaced 액션을 디스패치한다", async () => {
   const store = new Vuex.Store()
   store.dispatch = jest.fn()
-  
+
   const wrapper = shallowMount(ComponentWithButtons, {
     store. localVue
   })
-  
+
   wrapper.find(".namespaced-dispatch").trigger("click")
 	await wrapper.vm.$nextTick()
-  
+
   expect(store.dispatch).toHaveBeenCalledWith(
   	'namespaced/very/deeply/testAction',
   	{ msg: "Test Namespaced Dispatch" }

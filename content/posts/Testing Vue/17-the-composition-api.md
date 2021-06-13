@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 컴포지션 API"
 date: "2020-01-07T13:45:11.279Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue17"
+slug: "testingvue17"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -60,22 +60,22 @@ import {
 
 export default {
   name: 'CompositionApi',
-  
+
   props: {
     message: {
       type: String
     }
   },
-  
+
   setup(props) {
     const state = reactive({
       count: 0
     })
-    
+
     const increment = () => {
       state.count += 1
     }
-    
+
     return {
       state,
       increment,
@@ -111,7 +111,7 @@ describe("CompositionApi", () => {
         message: "Testing the composition API"
       }
     })
-    
+
     expect(wrapper.find(".message").text()).toBe("TESTING THE COMPOSITION API")
   })
 })
@@ -137,10 +137,10 @@ describe("CompositionApi", () => {
     const wrapper = shallowMount(CompositionApi, {
       propsData: { message: '' }
     })
-    
+
     wrapper.find('button').trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.find(".count").text()).toBe("Count: 1")
   })
 })

@@ -3,7 +3,7 @@ title: "1.3 프로그램과 프로세스"
 date: "2019-06-19T07:07:47.833Z"
 template: "post"
 draft: false
-slug: "/posts/CS_Program&Process"
+slug: "CS_Program&Process"
 category: "Computer Science"
 tags:
   - "CS"
@@ -36,7 +36,7 @@ description: "CS기초 공부내용 정리 📖"
 - 응용 프로그램의 실행
   - explorer.exe, Finder ...
 
-    
+
 
 (!) CPU는 한 클락에 한 가지 명령어만 순차적으로 실행하는데, 어떻게 다양한 프로그램을 동시에 실행하는 것 처럼 보여질까?
 

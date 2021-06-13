@@ -3,7 +3,7 @@ title: Lv1. 모의고사
 date: "2019-06-05"
 template: "post"
 draft: false
-slug: "/posts/programmers0605"
+slug: "programmers0605"
 category: "Algorithm"
 tags:
   - "Algorithm"
@@ -13,7 +13,7 @@ description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 
 ---
 
-# 문제 및 답안 
+# 문제 및 답안
 
 ## 문제
 
@@ -43,35 +43,35 @@ description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 ```js
 function solution(answers) {
     let answer = [];
-    
+
     let p1 = [1, 2, 3, 4, 5],
         p2 = [2, 1, 2, 3, 2, 4, 2, 5],
         p3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
-    
+
     let score1 = 0;
     let score2 = 0;
     let score3 = 0;
-    
+
     for (let i in answers) {
         let i1 = i % 5;
         let i2 = i % 8;
         let i3 = i % 10;
-      	// 프로그래밍 언어에서 나머지 연산의 결과값은 0 ~ N-1이다. 
+      	// 프로그래밍 언어에서 나머지 연산의 결과값은 0 ~ N-1이다.
       	// 이 성질을 이용해서 반복되는 구간의 인덱스를 구할 수 있다.
-        
+
         if (answers[i] === p1[i1]) score1++;
         if (answers[i] === p2[i2]) score2++;
         if (answers[i] === p3[i3]) score3++;
       	// 정답과 일치할때마다 점수를 올린다.
     }
-    
-    
+
+
     let maxScore = Math.max(score1, score2, score3)
-    
+
     if (maxScore === score1) answer.push(1);
     if (maxScore === score2) answer.push(2);
     if (maxScore === score3) answer.push(3);
-    
+
     return answer;
 }
 ```

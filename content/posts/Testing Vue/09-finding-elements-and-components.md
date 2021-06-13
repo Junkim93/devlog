@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 엘리먼트와 컴포넌트 찾�
 date: "2019-12-13T10:55:29.271Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue09"
+slug: "testingvue09"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -62,12 +62,12 @@ Parent:
 
 <script>
 import Child from "./Child.vue"
- 
+
 export default {
   name: "Parent",
 
   components: { Child },
-  
+
   data() {
 		return {
       showSpan: false,
@@ -93,7 +93,7 @@ import Parent from "@/components/Parent.vue"
 describe("Parent", () => {
   it("span 태그를 렌더하지 않는다", () => {
 		const wrapper = shallowMount(Parent)
-    
+
     expect(wrapper.find("span").isVisible()).toBe(false)
   })
 })
@@ -108,7 +108,7 @@ it("span 태그를 렌더한다", () => {
       return { showSpan: true }
     }
   })
-  
+
   expect(wrapper.find("span").isVisible()).toBe(true)
 })
 
@@ -134,7 +134,7 @@ import Child from "@/components/Child.vue"
 
 it("자식 컴포넌트를 렌더하지 않는다", () => {
   const wrapper = shallowMount(Parent)
-  
+
   expect(wrapper.find(Child).exists()).toBe(false)
 })
 ```
@@ -150,7 +150,7 @@ it("자식 컴포넌트를 렌더한다", () => {
       return { showChild: true }
     }
   })
-  
+
   expect(wrapper.find({ name: "Child"}).exists()).toBe(true)
 })
 ```
@@ -174,10 +174,10 @@ it("자식 컴포넌트를 렌더한다", () => {
 
 <script>
 import Child from "./Child.vue"
-  
+
 export default {
   name: "ParentWithManyChildren",
-  
+
   components: { Child }
 }
 </script>
@@ -188,7 +188,7 @@ export default {
 ``` js
 it("다수의 자식을 렌더한다", () => {
   const wrapper = shallowMount(ParentWithManyChildren)
-  
+
   expect(wrapper.findAll(Child).length).toBe(3)
 })
 ```

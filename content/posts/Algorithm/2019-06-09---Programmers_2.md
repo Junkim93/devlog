@@ -3,7 +3,7 @@ title: Lv1. K번째수
 date: "2019-06-09"
 template: "post"
 draft: false
-slug: "/posts/programmers0609_2"
+slug: "programmers0609_2"
 category: "Algorithm"
 tags:
   - "Algorithm"
@@ -11,7 +11,7 @@ tags:
   - "JavaScript"
 description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 ---
-# 문제 및 답안 
+# 문제 및 답안
 
 ## 문제
 배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.
@@ -44,7 +44,7 @@ description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 ``` js
 function solution(array, commands) {
     var answer = [];
-    
+
   	// 2차원 배열을 순회하기 위해 for of 문을 사용
     for (let value of commands) {
         let sliceNum = array.slice(value[0] - 1, value[1]);

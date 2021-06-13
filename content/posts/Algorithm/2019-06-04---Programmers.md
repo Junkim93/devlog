@@ -3,7 +3,7 @@ title: Lv1. 완주하지 못한 선수
 date: "2019-06-04"
 template: "post"
 draft: false
-slug: "/posts/programmers0604"
+slug: "programmers0604"
 category: "Algorithm"
 tags:
   - "Algorithm"
@@ -11,7 +11,7 @@ tags:
   - "JavaScript"
 description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 ---
-# 문제 및 답안 
+# 문제 및 답안
 
 ## 문제
 마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.
@@ -39,28 +39,28 @@ description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 function solution(participant, completion) {
     var answer = '';
     // 답지 본 문제 ㅜㅜ
-    
+
     // 배열 정렬
     participant.sort();
     completion.sort();
-    
+
     // for문으로 값 비교 (해당 객체의 인덱스 값을 변수 i에 반환하고, 전체 순회함)
     for (let i in participant) {
         if (participant[i] !== completion[i]) return participant[i];
     }
     // completion의 길이는 participant의 길이보다 1이 작기때문에
     // 두 배열을 비교해주면 결국 participant의 마지막 값은 completion과 대응되지 않음
-    // ex) "ana", "stanko", "mislav", "mislav" 
+    // ex) "ana", "stanko", "mislav", "mislav"
     //     "ana", "stanko", "mislav", 대응되는 값이 null =>> 따라서 두 값은 같지않다.
-    
+
     // completion의 인덱스 부분에 p를 넣을 수 있는 이유는
-    // for in 루프 자체가 해당 배열의 인덱스 값을 반환하기 때문이다. (for in의 콜백함수는 index) 
-    
+    // for in 루프 자체가 해당 배열의 인덱스 값을 반환하기 때문이다. (for in의 콜백함수는 index)
+
     // 기본 for문으로 구현
     for (let i = 0; i < participant.length; i++) {
          if (participant[i] !== completion[i]) return participant[i];
     }
-    
+
     // 기존에 사용한 방법 (효율성 통과 실패)
     for (let c of completion) {
          for (let p of participant) {

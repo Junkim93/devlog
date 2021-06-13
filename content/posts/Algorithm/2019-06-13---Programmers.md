@@ -3,7 +3,7 @@ title: Lv1. 나누어 떨어지는 숫자 배열
 date: "2019-06-13"
 template: "post"
 draft: false
-slug: "/posts/programmers0613"
+slug: "programmers0613"
 category: "Algorithm"
 tags:
   - "Algorithm"
@@ -11,7 +11,7 @@ tags:
   - "JavaScript"
 description: "하루 한 개 알고리즘 풀기 잊지마 (프로그래머스)"
 ---
-# 문제 및 답안 
+# 문제 및 답안
 
 ## 문제
 array의 각 element 중 divisor로 나누어 떨어지는 값을 오름차순으로 정렬한 배열을 반환하는 함수, solution을 작성해주세요.
@@ -39,19 +39,19 @@ divisor로 나누어 떨어지는 element가 하나도 없다면 배열에 -1을
 ``` js
 function solution(arr, divisor) {
     var answer = [];
-    
+
     for (let num of arr) {
         if (Number.isInteger(num / divisor)) {
             answer.push(num);
         }
     }
-    
+
     answer.sort((a, b) => {
         return a - b;
     });
-    
+
     if (answer.length === 0) answer.push(-1);
-    
+
     return answer;
 }
 ```

@@ -3,7 +3,7 @@ title: "JavaScript Prototype에 대해 알아보기"
 date: "2019-07-24T05:35:56.816Z"
 template: "post"
 draft: false
-slug: "/posts/prototype"
+slug: "prototype"
 category: "JavaScript"
 tags:
   - "JavaScript"
@@ -29,7 +29,7 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   ```javascript
   const user = {
   	id: "Hell",
-  
+
   	welcome() {
   		alert(`${this.id}, Hello World!`);
   	}
@@ -60,15 +60,15 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   let animal = {
   	eats: true
   };
-  
+
   let rabbit = {
   	jumps: true
   };
-  
+
   // 여기까지 입력하고 rabbit.eats 를 호출하면
   // 당연히 undefined 가 출력됩니다.
   // 왜냐하면 rabbit 에는 eats라는 프로퍼티가 없기 때문입니다.
-  
+
   rabbit.__proto__ = animal;
   // rabbit의 proto를 animal 로 설정해 주었습니다.
   console.log(rabbit.eats) // true;
@@ -88,9 +88,9 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   const rabbit = {
   	jumps: true
   };
-  
+
   rabbit.__proto__ = animal; // (1)
-  
+
   // 이제 우리는 rabbit 객체에서 두 개의 properties 를 모두 찾을 수 있습니다
   alert(rabbit.eats);
   alert(rabbit.jumps);
@@ -110,13 +110,13 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   		alert(`${this.name} is walking`);
   	}
   };
-  
+
   const rabbit = {
   	name: "rabbit",
   	jumps: true,
   	__proto__: animal
   };
-  
+
   rabbit.walk(); // "rabbit is walking"
   ```
 
@@ -132,22 +132,22 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   		alert(`${this.name} is walking`);
   	}
   };
-  
+
   const rabbit = {
   	name: "rabbit",
   	jumps: true,
   	__proto__: animal
   };
-  
+
   let bigFoot = {
   	footSize: 270,
   	__proto__: rabbit
   };
-  
+
   // walk() 메서드를 animal 객체로 부터 가져오고,
   // name 프로퍼티를 rabbit 객체에서 가져와서 출력합니다.
   bigFoot.walk(); // "rabbit is walking"
-  
+
   // 만약 rabbit 객체에서 name 프로퍼티를 지운다면,
   // bigFoot 객체는 animal 객체에서 name 프로퍼티를 읽어와서 출력합니다.
   ```
@@ -179,15 +179,15 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   		/* this method won't be used by rabbit */
   	}
   };
-  
+
   let rabbit = {
   	__proto__: animal
   };
-  
+
   rabbit.walk = function() {
   	alert("Rabbit! Bounce-bounce!");
   };
-  
+
   rabbit.walk(); // Rabbit! Bounce-bounce!
   rabbit // {walk: f}
   ```
@@ -202,23 +202,23 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   const user = {
   	name: "John",
   	surname: "Smith",
-  
+
   	set fullName(value) {
   		[this.name, this.surname] = value.split(" ");
   	},
-  
+
   	get fullName() {
   		return `${this.name} ${this.surname}`;
   	}
   };
-  
+
   const admin = {
   	__proto__: user,
   	isAdmin: true
   };
-  
+
   alert(admin.fullName); // John Smith (1)
-  
+
   // setter triggers!
   admin.fullName = "Alice Cooper"; // (2)
   ```
@@ -230,7 +230,7 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   ```javascript
   let animal = {
   	eats: true,
-  	
+
   	set walk(value) {
   		this.name = value;
       },
@@ -238,11 +238,11 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   		return console.log(`${this.name}! Bounce-bounce!`);
       }
   };
-  
+
   let rabbit = {
   	__proto__: animal
   };
-  
+
   rabbit.walk = "rabbit";
   rabbit.walk;   // "rabbit! Bounce-bounce!"
   ```
@@ -275,17 +275,17 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   		this.isSleeping = true;
   	}
   };
-  
+
   const rabbit = {
   	name: "White Rabbit",
   	__proto__: animal
   };
-  
+
   // modifies rabbit.isSleeping
   rabbit.sleep();
-  
+
   alert(rabbit.isSleeping); // true
-  alert(animal.isSleeping); 
+  alert(animal.isSleeping);
   // undefined (no such property in the prototype)
   ```
 
@@ -305,15 +305,15 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   let animal = {
   	eats: true
   };
-  
+
   let rabbit = {
   	jumps: true,
   	__proto__: animal
   };
-  
+
   // Object.keys only return own keys
   console.log(Object.keys(rabbit));   // jumps
-  
+
   // for..in loops over both own and inherited keys
   for (let prop in rabbit) console.log(prop); // jumps, then eats
   ```
@@ -326,15 +326,15 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
   const animal = {
   	eats: true
   };
-  
+
   const rabbit = {
   	jumps: true,
   	__proto__: animal
   };
-  
+
   for(let prop in rabbit) {
   	let isOwn = rabbit.hasOwnProperty(prop);
-  
+
   	if (isOwn) {
   		console.log(`Our: ${prop}`); // Our: jumps
   	} else {
@@ -367,4 +367,3 @@ description: "JavaScript Info의 내용을 개인적으로 번역하고 정리�
 
   ------
 
-  

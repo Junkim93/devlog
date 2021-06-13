@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 컴포넌트 내에 있는 Vuex - 
 date: "2019-12-19T14:25:06.166Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue14"
+slug: "testingvue14"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -44,7 +44,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 <script>
 export default {
   name: "ComponentWithVuex",
-  
+
   data() {
     return {
       username: this.$store.state.username
@@ -76,7 +76,7 @@ describe("ComponentWithVuex", () => {
       store,
       localVue
     })
-    
+
     expect(wrapper.find(".username").text()).toBe("alice")
   })
 })
@@ -101,7 +101,7 @@ it("mock 스토어를 사용하여 username을 렌더한다", () => {
       }
     }
   })
-  
+
   expect(wrapper.find(".username").text()).toBe("alice")
 })
 ```
@@ -126,7 +126,7 @@ it("mock 스토어를 사용하여 username을 렌더한다", () => {
 <script>
 export default {
   name: "ComponentWithGetters",
-  
+
   computed: {
     fullname() {
       return this.$store.getters.fullname
@@ -149,7 +149,7 @@ const store = new Vuex.Store({
     firstName: "Alice",
     lastName: "Doe"
   },
-  
+
   getters: {
     fullname: (state) => state.firstName + " " + state,lastName
   }
@@ -157,7 +157,7 @@ const store = new Vuex.Store({
 
 it("실제 Vuex getter를 사용해서 username를 렌더한다", () => {
   const wrapper = shallowMount(ComponentWithGetters, { store, localVue })
-  
+
   expect(wrapper.find(".fullname").text()).toBe("Alice Doe")
 })
 ```
@@ -201,7 +201,7 @@ it("computed 마운팅 옵션을 사용해서 username 렌더한다", () => {
       fullname: () => "Alice Doe"
     }
   })
-  
+
   expect(wrapper.find(".fullname").text()).toBe("Alice Doe")
 })
 ```
@@ -221,7 +221,7 @@ import { mapGetters } from "vuex"
 
 export default {
   name: "ComponentWithGetters",
-  
+
   computed: {
     ...mapGetters({
       'fullname'

@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 보일러플레이트 줄이기"
 date: "2020-01-19T23:46:09.730Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue18"
+slug: "testingvue18"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -42,16 +42,16 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 <template>
   <div>
     <div id="message" v-if="message">{{ message }}</div>
-    
+
     <div v-if="authenticated">
       <router-link
 				class="new-post"
-        to="/posts/new"
+        to="new"
 			>
       	New Post
       </router-link>
     </div>
-    
+
     <h1>Posts</h1>
     <div
     	v-for="post in posts"
@@ -71,20 +71,20 @@ export default {
   props: {
     message: String
   },
-  
+
   computed: {
     authenticated() {
       return this.$store.state.authenticated
     },
-    
+
     posts() {
       return this.$store.state.posts
     }
   },
-  
+
   methods: {
     postLink(id) {
-			retrun `/posts/${id}`
+			retrun `${id}`
     }
   }
 }
@@ -126,7 +126,7 @@ export const store = new Vuex.Store({ ... })
 export const createStore = () => {
   return new Vuex.Store({ ... })
 }
-                        
+
 // router.js
 export default new VueRouter({ ... })
 export const createRouter = () => {
@@ -218,7 +218,7 @@ const createTestVue = () => {
   const localVue = createLocalVue()
   localVue.use(VueRouter)
   localVue.use(Vuex)
-  
+
   const store = createStore()
   const router = createRouter()
   return { store, router, localVue }
@@ -239,7 +239,7 @@ it('통과하면 메시지를 렌더한다', () => {
     router,
     localVue
   })
-  
+
   expect(wrapper.find("#message").text()).toBe('New content coming soon!')
 })
 ```
@@ -253,10 +253,10 @@ it('posts를 렌더한다', async () => {
     store,
     router,
   })
-  
+
   wrapper.vm.$store.commit('ADD_POSTS', [{ id: 1, title: 'Post' }])
   await wrapper.vm.$nextTick()
-  
+
   expect(wrapper.findAll('.post').length).toBe(1)
 })
 ```
@@ -289,16 +289,16 @@ it('통과하면 메시지를 렌더한다', () => {
   const wrapper = createWrapper(Posts, {
     propsData: { message }
   })
-  
+
   expect(wrapper.find("#message").text()).toBe('New content coming soon!')
 })
 
 it('posts를 렌더한다', async () => {
   const wrapper = createWrapper(Posts)
-  
+
   wrapper.vm.$store.commit('ADD_POSTS', [{ id: 1, title: 'Post' }])
   await wrapper.vm.$nextTick()
-  
+
   expect(wrapper.findAll('.post').length).toBe(1)
 })
 ```
@@ -333,7 +333,7 @@ const createWrapper = (component, options = {}, storeState = {}) => {
   localVue.use(Vuex)
   const store = createStore(storeState)
   const router = createRouter()
-  
+
   return mount(component, {
     store,
     router,
@@ -350,7 +350,7 @@ it('posts를 렌더한다', async () => {
   const wrapper = createWrapper(Posts, {}, {
     posts: [{ id: 1, title: 'Post' }]
   })
-  
+
   expect(wrapper.findAll('.post').length).toBe(1)
 })
 ```

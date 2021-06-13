@@ -3,7 +3,7 @@ title: "1.4 GUI / CLI, Shell, 파일 권한"
 date: "2019-06-23T07:07:47.833Z"
 template: "post"
 draft: false
-slug: "/posts/CS_14"
+slug: "CS_14"
 category: "Computer Science"
 tags:
   - "CS"

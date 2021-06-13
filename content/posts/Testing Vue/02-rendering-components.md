@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 컴포넌트 렌더링하기"
 date: "2019-11-18T11:20:31.225Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue02"
+slug: "testingvue02"
 category: "Vue.js"
 tags:
   - "Vue.js"

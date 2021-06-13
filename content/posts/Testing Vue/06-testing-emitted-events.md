@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: emitted 이벤트 테스트하기"
 date: "2019-12-02T23:28:33.832Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue06"
+slug: "testingvue06"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -30,7 +30,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 
 
 
-## 컴포넌트를 작성하고 테스트하기 
+## 컴포넌트를 작성하고 테스트하기
 
 ---
 
@@ -45,7 +45,7 @@ description: "Vue testing handbook의 내용을 번역한 글입니다 📖"
 <script>
 	export default {
     name: "Emitter",
-    
+
     methods: {
       emitEvent() {
         this.$emit("myEvent", "name", "password")
@@ -67,9 +67,9 @@ import { shallowMount } from "@vue/test-utils"
 describe("Emitter", () => {
   it("두 개의 인자와 함께 이벤트를 방출합니다", () => {
     const wrapper = shallowMount(Emitter)
-    
+
     wrapper.vm.emitEvent()
-    
+
     console.log(wrapper.emitted())
   })
 })
@@ -104,10 +104,10 @@ emitted().myEvent //=> [ [ 'name', 'password' ] ]
 ```js
 it("두 개의 인자를 가진 이벤트를 방출합니다", () => {
   const wrapper = shallowMount(Emitter)
-  
+
   wrapper.vm.emitEvent()
   wrapper.vm.emitEvent()
-  
+
   console.log(wrapper.emitted().myEvent)
 })
 ```
@@ -126,9 +126,9 @@ emitted 이벤트에 대한 실제 어설션을 만들어 보겠습니다.
 ```js
 it("두 개의 인자를 가진 이벤트를 방출합니다", () => {
 	const wrapper = shallowMount(Emitter)
-	
+
 	wrapper.vm.emitEvent()
-	
+
 	expect(wrapper.emitted().myEvent[0]).toEqual(["name", "password"])
 })
 ```
@@ -147,9 +147,9 @@ it("두 개의 인자를 가진 이벤트를 방출합니다", () => {
 it("컴포넌트를 마운트 하지 않고 이벤트를 방출한다", () => {
 	const events = {}
   const $emit = (event, ...args) => { events[event] = [...args] }
-  
+
   Emitter.methods.emitEvent.call({ $emit })
-  
+
   expect(events.myEvent).toEqual(["name", "password"])
 })
 ```

@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: 사용자 입력 시연하기"
 date: "2019-11-24T09:48:12.827Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue05"
+slug: "testingvue05"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -61,14 +61,14 @@ Vue 컴포넌트에서 하는 일 중 가장 일반적인 것은 사용자의 �
 <script>
 	export default {
 		name: "FormSubmitter",
-      
+
     data() {
       return {
         username: '',
         submitted: false
       }
     },
-      
+
     methods: {
       handleSubmit() {
         this.submitted = true
@@ -95,11 +95,11 @@ import FormSubmitter from "@/components/FormSubmitter.vue"
 describe("FormSubmitter", () => {
   it("제출했을 때 알림이 나타난다.", async () => {
     const wrapper = shallowMount(FormSubmitter)
-    
+
     wrapper.find("[data-username]").setValue("alice")
     wrapper.find("form").trigger("submit.prevent")
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.find(".message").text())
     	.toBe("Thank you for your submission, alice.")
   })
@@ -118,7 +118,7 @@ describe("FormSubmitter", () => {
 
 새로운 라인으로 각각의 단계를 구분해서 테스트를 좀 더 읽기 수월하게 만듭니다.
 
-트리거는 매우 간단합니다. 몇 가지 입력을 시연하기 원하는 엘리먼트를 갖기 위해 `find`를 사용합니다. 그리고 이벤트의 이름과 임의의 수식어를 가지고 `trigger`를 호출합니다. 
+트리거는 매우 간단합니다. 몇 가지 입력을 시연하기 원하는 엘리먼트를 갖기 위해 `find`를 사용합니다. 그리고 이벤트의 이름과 임의의 수식어를 가지고 `trigger`를 호출합니다.
 
 
 
@@ -231,10 +231,10 @@ it("제출했을 때 알림이 나타난다.", () => {
       $http: mockHttp
     }
   })
-  
+
   wrapper.find("[data-username]").setValue("alice")
   wrapper.find("form").trigger("submit.prevent")
-  
+
   expect(wrapper.find(".message").text())
   	.toBe("Thank you for your submission, alice")
 })
@@ -271,12 +271,12 @@ it("reveals a notification when submitted", async () => {
       $http: mockHttp
     }
   })
-  
+
   wrapper.find("[data-username]").setValue("alice")
   wrapper.find("form").trigger("submit.prevent")
-  
+
   await flushPromises()
-  
+
   expect(wrapper.find(".message").text())
   	.toBe("Thank you for your submission, alice.")
 })

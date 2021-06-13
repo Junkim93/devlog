@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: Vuex 테스트하기"
 date: "2019-12-15T07:43:16.571Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue10"
+slug: "testingvue10"
 category: "Vue.js"
 tags:
   - "Vue.js"

@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: Vuex-뮤테이션 테스트"
 date: "2019-12-15T08:00:50.377Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue11"
+slug: "testingvue11"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -39,7 +39,7 @@ TDD로 개발 해보겠습니다. 뮤테이션의 시작은 아래와 같습니�
 ``` js
 export default {
   SET_POST(state, { post }) {
-  
+
 	}
 }
 ```
@@ -56,9 +56,9 @@ describe("SET_POST", () => {
       postIds: [],
       posts: {}
     }
-    
+
     mutations.SET_POST(state, { post })
-    
+
     expect(state).toEqual({
       postIds: [1],
       posts: { "1": post }

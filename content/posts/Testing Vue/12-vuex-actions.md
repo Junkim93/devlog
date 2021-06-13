@@ -3,7 +3,7 @@ title: "(번역) Vue 테스트 코드 작성: Vuex-액션 테스트"
 date: "2019-12-27T13:26:01.000Z"
 template: "post"
 draft: false
-slug: "/posts/testingvue12"
+slug: "testingvue12"
 category: "Vue.js"
 tags:
   - "Vue.js"
@@ -48,7 +48,7 @@ export default {
     const authenticated = await axios.post("/api/authenticate", {
       username, password
     })
-    
+
     commit("set_authenticated", authenticated)
   }
 }
@@ -74,9 +74,9 @@ describe("authenticate", () => {
     const commit = jest.fn()
     const username = "alice"
     const password = "password"
-    
+
     await actions.authenticate({ commit }, { username, password })
-    
+
     expect(url).toBe("/api/authenticate")
     expect(body).toEqual({ username, password })
     expect(commit).toHaveBeenCalledWith(
@@ -139,7 +139,7 @@ jest.mock("axios", () => ({
 ``` js
 it("에러를 잡는다", async () => {
   mockError = true
-  
+
   await expect(actions.authenticate({ commit: jest.fn() }, {}))
   	.rejects.toThrow("API 에러가 발생했다")
 })
@@ -157,7 +157,7 @@ jest.mock("axios", () => ({
     return new Promise((resolve) => {
       if (mockError)
         throw Error()
-      
+
       url = _url
       body. = _body
       resolve(true)
@@ -191,7 +191,7 @@ export default {
       const authenticated = await axios.post("/api/authenticate", {
         username, password
       })
-      
+
       commit("SET_AUTHENTICATED", authenticated)
     } catch (e) {
       throw Error("API Error occurred.")
