@@ -240,11 +240,11 @@ module.exports = {
     },
     'gatsby-plugin-flow',
     'gatsby-plugin-optimize-svgs',
-	{
-		resolve: 'gatsby-plugin-google-adsense',
-		options: {
-			publisherId: 'ca-pub-4789207679246319',
-		},
-	},
+    {
+      resolve: 'gatsby-plugin-google-adsense',
+      options: {
+        publisherId: 'ca-pub-4789207679246319',
+      },
+    },
   ],
 };
