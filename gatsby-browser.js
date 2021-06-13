@@ -1,6 +1,4 @@
 'use strict';
 
 require('./src/assets/scss/init.scss');
-require('prismjs/themes/prism-tomorrow.css');
-
-exports.onClientEntry = () => {};
+require('./static/css/prismjs/theme.min.css');
